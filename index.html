@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Arsalan Mirsadraei — Architect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;cursor:none!important;}
+:root{
+  --ink:#0D0D0D; --surface:#171717; --card:#1E1E1E; --border:#252525;
+  --cream:#F5F2EC; --cream2:#EDE9E2;
+  --text:#EDEBE7; --muted:rgba(237,235,231,.52); --dim:rgba(237,235,231,.28);
+  --amber:#C47D28; --amber2:#E8A440;
+  --sage:#4A7A58; --sage2:#7DAD8C;
+  --f:'Plus Jakarta Sans',sans-serif;
+  --bar:110px;/* nav+tab combined offset */
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--f);background:var(--ink);color:var(--text);cursor:none;overflow-x:hidden;}
+
+/* CURSOR */
+#cur{position:fixed;top:0;left:0;width:8px;height:8px;background:var(--amber);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
+#cur-r{position:fixed;top:0;left:0;width:30px;height:30px;border:1.5px solid rgba(196,125,40,.38);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .28s,height .28s,border-color .28s;}
+body.hov #cur-r{width:46px;height:46px;border-color:var(--amber);}
+
+/* PROGRESS */
+#prog{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--amber),var(--amber2));z-index:4000;pointer-events:none;transition:width .1s;}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;height:62px;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 48px;transition:background .3s;}
+#nav.on{background:rgba(13,13,13,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);}
+.n-logo{font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--text);text-decoration:none;cursor:none;}
+.n-right{display:flex;align-items:center;gap:20px;}
+.n-info{font-size:10px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;}
+.n-cta{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--amber2);border:1px solid rgba(232,164,64,.32);padding:8px 18px;text-decoration:none;transition:background .2s,color .2s;cursor:none;}
+.n-cta:hover{background:var(--amber);color:var(--ink);border-color:var(--amber);}
+
+/* TABS */
+#tabs{position:fixed;top:62px;left:0;right:0;height:48px;z-index:999;background:rgba(13,13,13,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);display:flex;align-items:stretch;}
+.tb{flex:1;display:flex;align-items:center;justify-content:center;border:none;background:transparent;cursor:none;border-bottom:2px solid transparent;padding:0 3px;transition:border-color .2s;}
+.tb span{font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);transition:color .2s;white-space:nowrap;}
+.tb:hover span{color:var(--text);}
+.tb.active span{color:var(--amber2);}
+.tb.active{border-bottom-color:var(--amber);}
+/* Skills legend + scale */
+.sk-scale{display:flex;justify-content:space-between;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--border);position:relative;}
+.sk-scale::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;}
+.sk-scale-item{font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-align:center;}
+.sk-scale-item.dim{color:var(--dim);}
+.sk-scale-item.amber{color:var(--amber);}
+/* bar marker at Advanced (75%) */
+.sk-bar{position:relative;}
+.sk-bar::before{content:'';position:absolute;left:75%;top:-3px;bottom:-3px;width:1px;background:rgba(232,164,64,.25);z-index:1;pointer-events:none;}
+/* Project list panel */
+#panel-projects{padding-top:110px;background:var(--ink);}
+.pl-head{padding:52px 56px 40px;border-bottom:1px solid var(--border);}
+.pl-head h2{font-size:clamp(36px,6vw,80px);font-weight:800;line-height:.92;letter-spacing:-.03em;color:var(--text);}
+.pl-head h2 em{font-style:normal;color:var(--amber);}
+.pl-head p{font-size:14px;color:var(--muted);margin-top:14px;max-width:540px;line-height:1.75;}
+.pl-item{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--border);}
+.pl-item:last-child{border-bottom:1px solid var(--border);}
+.pl-info{padding:52px 56px;display:flex;flex-direction:column;justify-content:space-between;}
+.pl-num{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:10px;}
+.pl-name{font-size:clamp(20px,2.5vw,32px);font-weight:800;line-height:1.05;letter-spacing:-.02em;color:var(--text);margin-bottom:8px;}
+.pl-firm{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-bottom:16px;}
+.pl-desc{font-size:13px;color:var(--muted);line-height:1.78;margin-bottom:22px;}
+.pl-links{display:flex;flex-direction:column;gap:6px;}
+.pl-link{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;color:var(--amber2);text-decoration:none;transition:color .2s;cursor:none;}
+.pl-link:hover{color:var(--text);}
+.pl-link::before{content:'↗';font-size:10px;}
+.pl-preview{position:relative;overflow:hidden;background:var(--surface);min-height:320px;}
+.pl-preview img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s,filter .4s;filter:saturate(.6) brightness(.85);}
+.pl-preview:hover img{transform:scale(1.03);filter:saturate(.9) brightness(.95);}
+.pl-preview-lbl{position:absolute;bottom:0;left:0;right:0;padding:16px 20px;background:linear-gradient(transparent,rgba(13,13,13,.88));font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);}
+/* Professional works cards in portfolio */
+.prof-works{padding:44px 56px;border-top:1px solid var(--border);margin-top:8px;}
+.prof-works-head{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);margin-bottom:20px;}
+.pw-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;}
+.pw-card{position:relative;overflow:hidden;background:var(--surface);cursor:none;}
+.pw-card img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;transition:transform .5s,filter .4s;filter:saturate(.55) brightness(.8);}
+.pw-card:hover img{transform:scale(1.03);filter:saturate(.9) brightness(.95);}
+.pw-card-body{padding:20px 22px;}
+.pw-card-firm{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--amber2);margin-bottom:5px;}
+.pw-card-name{font-size:15px;font-weight:800;color:var(--text);line-height:1.2;margin-bottom:6px;}
+.pw-card-role{font-size:11px;color:var(--dim);line-height:1.6;}
+@media(max-width:860px){
+  .pl-item{grid-template-columns:1fr;}
+  .pl-preview{min-height:220px;}
+  .pw-grid{grid-template-columns:1fr;}
+  .prof-works{padding-left:20px;padding-right:20px;}
+  .pl-head,.pl-info{padding-left:20px;padding-right:20px;}
+}
+
+/* PANELS */
+.panel{display:none;}
+.panel.active{display:block;}
+
+/* ══════════════════════
+   HOME
+══════════════════════ */
+#panel-home{height:calc(100vh - 110px);margin-top:110px;overflow-y:scroll;scroll-snap-type:y mandatory;-webkit-overflow-scrolling:touch;}
+.snap{scroll-snap-align:start;scroll-snap-stop:always;}
+
+/* Video hero */
+#v-sec{height:100%;position:relative;overflow:hidden;display:flex;align-items:flex-end;}
+#bg-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
+.v-g1{position:absolute;inset:0;background:linear-gradient(105deg,rgba(13,13,13,.9) 0%,rgba(13,13,13,.45) 55%,rgba(13,13,13,.1) 100%);z-index:1;}
+.v-g2{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,13,13,.95) 0%,transparent 50%);z-index:1;}
+.v-body{position:relative;z-index:2;padding:0 56px 72px;max-width:800px;}
+.v-eye{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--amber2);margin-bottom:16px;opacity:0;animation:fup .7s ease .2s forwards;}
+.v-name{font-size:clamp(56px,9.5vw,130px);font-weight:800;line-height:.88;letter-spacing:-.03em;color:var(--text);margin-bottom:22px;opacity:0;animation:fup .9s ease .4s forwards;}
+.v-name em{font-style:normal;color:var(--amber);}
+.v-desc{font-size:clamp(13px,1.3vw,16px);font-weight:300;line-height:1.8;color:var(--muted);max-width:440px;margin-bottom:36px;opacity:0;animation:fup .9s ease .6s forwards;}
+.v-acts{display:flex;gap:10px;flex-wrap:wrap;opacity:0;animation:fup .8s ease .8s forwards;}
+.v-btn{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:12px 22px;text-decoration:none;transition:background .2s,color .2s;cursor:none;}
+.v-btn-p{background:var(--amber);color:var(--ink);}
+.v-btn-p:hover{background:var(--amber2);}
+.v-btn-s{border:1px solid rgba(237,235,231,.22);color:var(--text);}
+.v-btn-s:hover{border-color:var(--amber);color:var(--amber2);}
+.v-line{width:1px;height:38px;background:linear-gradient(to bottom,var(--amber),transparent);animation:pulse 2s ease-in-out infinite;margin-top:5px;}
+
+/* About */
+#ab-sec{min-height:100%;background:var(--cream);color:var(--ink);display:flex;flex-direction:column;justify-content:center;padding:80px 56px;}
+.eye{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);margin-bottom:10px;}
+.ab-title{font-size:clamp(36px,5.5vw,68px);font-weight:800;line-height:.95;letter-spacing:-.03em;color:var(--ink);margin-bottom:52px;}
+.ab-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
+.ab-bio p{font-size:15px;line-height:1.82;color:#2A2A2A;margin-bottom:14px;}
+.ab-bio p:first-child{font-size:17px;font-weight:500;line-height:1.65;color:#111;}
+.creds{display:flex;flex-direction:column;gap:8px;margin-top:22px;}
+.cred{padding:12px 15px;background:var(--ink);color:var(--text);}
+.cred-txt{font-size:12px;line-height:1.5;color:rgba(237,235,231,.72);}
+.cred-txt strong{display:block;font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--amber2);margin-bottom:3px;}
+.cv-cta{display:inline-flex;align-items:center;gap:9px;margin-top:32px;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--amber);background:none;border:none;cursor:none;padding:0;text-decoration:none;}
+.cv-cta:hover{color:var(--amber2);}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid #D5D0C8;}
+.st-box{padding:26px 22px;border-right:1px solid #D5D0C8;border-bottom:1px solid #D5D0C8;}
+.st-box:nth-child(2n){border-right:none;}
+.st-box:nth-last-child(-n+2){border-bottom:none;}
+.st-span{grid-column:1/-1;border-right:none !important;border-bottom:none !important;}
+.st-n{font-size:46px;font-weight:800;line-height:1;color:#111;letter-spacing:-.03em;}
+.st-l{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#7B7369;margin-top:5px;}
+/* cert section labels */
+.cert-section-lbl{grid-column:1/-1;padding:28px 0 10px;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);border-top:1px solid var(--border);margin-top:4px;}
+.cert-section-lbl:first-child{border-top:none;padding-top:10px;}
+.cert-img-wrap{background:var(--surface);padding:18px;border:1px solid var(--border);}
+.cert-img-wrap img{width:100%;display:block;}
+
+/* ══════════════════════
+   CV
+══════════════════════ */
+#panel-cv{padding-top:110px;background:var(--ink);}
+.mq{overflow:hidden;border-bottom:1px solid var(--border);padding:12px 0;}
+.mq-inner{display:flex;white-space:nowrap;animation:marquee 28s linear infinite;}
+.mq-s{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);padding:0 28px;}
+.mq-d{color:var(--amber);}
+.cs{padding:80px 56px;border-top:1px solid var(--border);}
+.cs.dk{background:var(--ink);color:var(--text);}
+.cs.lt{background:var(--cream);color:var(--ink);}
+.cs.sf{background:var(--surface);color:var(--text);}
+.cs-eye{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);margin-bottom:10px;}
+.cs-title{font-size:clamp(28px,4vw,52px);font-weight:800;line-height:1;letter-spacing:-.025em;margin-bottom:48px;}
+.lt .cs-title{color:var(--ink);}
+.dk .cs-title,.sf .cs-title{color:var(--text);}
+/* Timeline */
+.tl{position:relative;padding-left:28px;}
+.tl-track{position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--border);}
+.tl-fill{position:absolute;left:0;top:0;width:1px;height:0;background:var(--amber);transition:height 1.6s ease;}
+.tl.go .tl-fill{height:100%;}
+.tl-item{position:relative;margin-bottom:44px;opacity:0;transform:translateX(-12px);transition:opacity .55s,transform .55s;}
+.tl-item.vis{opacity:1;transform:none;}
+.tl-dot{position:absolute;left:-33px;top:5px;width:8px;height:8px;background:var(--amber);border-radius:50%;border:2px solid var(--ink);}
+.tl-dt{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:2px;}
+.tl-loc{font-size:10px;color:var(--dim);margin-bottom:5px;}
+.tl-role{font-size:18px;font-weight:700;color:var(--text);line-height:1.2;margin-bottom:2px;}
+.tl-org{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(237,235,231,.36);margin-bottom:9px;}
+.tl-desc{font-size:13px;color:var(--muted);line-height:1.7;}
+.tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:9px;}
+.tag{font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--border);color:var(--dim);}
+/* Education */
+.edu-g{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.edu-c{background:var(--card);padding:36px 28px;position:relative;overflow:hidden;opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s;}
+.edu-c.vis{opacity:1;transform:none;}
+.edu-c::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--amber);transform:scaleX(0);transform-origin:left;transition:transform .7s .2s;}
+.edu-c.vis::after{transform:scaleX(1);}
+.edu-badge{font-size:9px;font-weight:700;letter-spacing:.17em;text-transform:uppercase;color:var(--amber2);margin-bottom:12px;}
+.edu-deg{font-size:18px;font-weight:800;line-height:1.15;color:var(--text);margin-bottom:6px;}
+.edu-school{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--dim);}
+.edu-yr{font-size:10px;color:var(--dim);margin-top:14px;}
+.edu-note{font-size:11px;color:rgba(237,235,231,.32);margin-top:8px;line-height:1.6;font-style:italic;}
+.edu-n{position:absolute;right:12px;bottom:4px;font-size:72px;font-weight:800;color:rgba(255,255,255,.022);line-height:1;user-select:none;}
+/* Skills */
+.sk-g{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
+.sg{padding:28px 22px;background:var(--card);opacity:0;transform:translateY(12px);transition:opacity .5s,transform .5s;}
+.sg.vis{opacity:1;transform:none;}
+.sg-lbl{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+.sk{margin-bottom:13px;}
+.sk-name{font-size:12px;font-weight:600;color:var(--text);margin-bottom:5px;display:flex;justify-content:space-between;}
+.sk-name span{font-size:10px;font-weight:400;color:var(--dim);}
+.sk-bar{height:2px;background:var(--border);position:relative;overflow:hidden;}
+.sk-fill{position:absolute;top:0;left:0;bottom:0;background:linear-gradient(90deg,var(--amber),var(--amber2));width:0;transition:width 1.2s ease;}
+.sg.vis .sk-fill{width:var(--w);}
+/* Awards */
+.aw-g{display:grid;grid-template-columns:1fr 1fr;gap:52px;}
+.aw-items,.pub-items{display:flex;flex-direction:column;gap:2px;}
+.aw-item{display:flex;gap:16px;padding:18px 20px;background:var(--card);opacity:0;transform:translateX(-14px);transition:opacity .55s,transform .55s;}
+.aw-item.vis{opacity:1;transform:none;}
+.aw-yr{font-size:10px;font-weight:700;color:var(--amber2);flex-shrink:0;padding-top:1px;}
+.aw-t{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;line-height:1.3;}
+.aw-d{font-size:11px;color:var(--dim);line-height:1.6;}
+.pub-item{padding:18px 20px;background:var(--surface);border-left:3px solid var(--sage);opacity:0;transform:translateX(14px);transition:opacity .55s,transform .55s;}
+.pub-item.vis{opacity:1;transform:none;}
+.pub-type{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sage2);margin-bottom:6px;}
+.pub-t{font-size:13px;font-weight:600;line-height:1.5;color:var(--text);margin-bottom:4px;}
+.pub-m{font-size:11px;color:var(--dim);}
+/* Research */
+.res-g{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.rc{padding:36px 28px;background:var(--card);opacity:0;transform:translateY(12px);transition:opacity .5s,transform .5s;}
+.rc.vis{opacity:1;transform:none;}
+.rc-icon{font-size:22px;margin-bottom:12px;}
+.rc-t{font-size:15px;font-weight:700;color:var(--text);margin-bottom:8px;line-height:1.2;}
+.rc-d{font-size:12px;color:var(--dim);line-height:1.7;}
+/* Contact */
+.co-head{font-size:clamp(32px,4.5vw,58px);font-weight:800;line-height:1;letter-spacing:-.025em;color:var(--text);margin-bottom:12px;}
+.co-head em{font-style:normal;color:var(--amber);}
+.co-sub{font-size:15px;font-weight:300;color:var(--muted);max-width:420px;line-height:1.75;margin-bottom:32px;}
+.co-ls{display:flex;gap:8px;flex-wrap:wrap;}
+.co-l{display:flex;align-items:center;gap:7px;padding:11px 18px;border:1px solid var(--border);color:var(--text);text-decoration:none;font-size:12px;font-weight:600;transition:background .2s,border-color .2s,color .2s;cursor:none;}
+.co-l:hover{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+.site-ft{background:#080808;padding:20px 56px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);}
+.site-ft p{font-size:10px;color:var(--dim);}
+.site-ft a{font-size:10px;color:var(--amber);text-decoration:none;cursor:none;}
+
+/* ══════════════════════════════════════
+   PORTFOLIO — SPREADS (dark, full-width)
+══════════════════════════════════════ */
+#panel-portfolio{padding-top:110px;background:var(--ink);}
+.port-head{padding:52px 56px 40px;border-bottom:1px solid var(--border);}
+.port-head h2{font-size:clamp(36px,6vw,84px);font-weight:800;line-height:.92;letter-spacing:-.03em;color:var(--text);}
+.port-head h2 em{font-style:normal;color:var(--amber);}
+.port-head p{font-size:14px;color:var(--muted);margin-top:14px;max-width:520px;line-height:1.75;}
+
+/* Project section marker */
+.proj-section{padding:38px 56px 20px;border-top:1px solid var(--border);margin-top:6px;}
+.proj-section:first-of-type{border-top:none;padding-top:44px;}
+.proj-num{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);margin-bottom:5px;}
+.proj-name{font-size:clamp(18px,2.2vw,28px);font-weight:800;letter-spacing:-.02em;color:var(--text);margin-bottom:4px;}
+.proj-sub{font-size:12px;color:var(--dim);}
+
+/* Spreads — full width, one per row */
+.spreads-col{display:flex;flex-direction:column;gap:3px;padding:16px 56px 44px;}
+
+.spread{
+  position:relative;
+  overflow:hidden;
+  cursor:none;
+  background:var(--ink);
+  /* mask: fade edges to blend into dark background */
+  -webkit-mask-image:linear-gradient(to right,rgba(0,0,0,0) 0%,rgba(0,0,0,1) 3%,rgba(0,0,0,1) 97%,rgba(0,0,0,0) 100%),
+    linear-gradient(to bottom,rgba(0,0,0,0) 0%,rgba(0,0,0,1) 2%,rgba(0,0,0,1) 98%,rgba(0,0,0,0) 100%);
+  -webkit-mask-composite:destination-in;
+  mask-image:linear-gradient(to right,rgba(0,0,0,0) 0%,rgba(0,0,0,1) 3%,rgba(0,0,0,1) 97%,rgba(0,0,0,0) 100%),
+    linear-gradient(to bottom,rgba(0,0,0,0) 0%,rgba(0,0,0,1) 2%,rgba(0,0,0,1) 98%,rgba(0,0,0,0) 100%);
+  mask-composite:intersect;
+}
+.spread-inner{
+  display:flex;
+  width:100%;
+  background:var(--ink);
+}
+.spread-inner img{
+  width:50%;
+  height:auto;
+  display:block;
+  flex-shrink:0;
+  object-fit:contain;
+}
+.spread-inner.single img{
+  width:66%;
+  margin:0 auto;
+}
+.spread:hover .sp-over{opacity:1;}
+.sp-over{position:absolute;inset:0;background:rgba(13,13,13,.42);opacity:0;transition:opacity .25s;display:flex;align-items:center;justify-content:center;}
+.sp-over span{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text);border:1px solid rgba(237,235,231,.4);padding:8px 16px;}
+.spread-num{position:absolute;bottom:10px;right:16px;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(237,235,231,.3);}
+
+/* Spread lightbox */
+#slb{position:fixed;inset:0;background:rgba(6,6,6,.99);z-index:5000;display:none;flex-direction:column;}
+#slb.open{display:flex;}
+.slb-top{display:flex;align-items:center;justify-content:space-between;padding:14px 26px;border-bottom:1px solid var(--border);flex-shrink:0;}
+.slb-title{font-size:13px;font-weight:700;color:var(--text);}
+.slb-count{font-size:11px;color:var(--dim);}
+.slb-x{font-size:20px;color:var(--dim);background:none;border:none;cursor:none;padding:2px 8px;transition:color .2s;}
+.slb-x:hover{color:var(--text);}
+.slb-body{flex:1;display:flex;align-items:center;justify-content:center;gap:0;position:relative;overflow:hidden;padding:8px 52px;}
+#slb-l,#slb-r{max-height:100%;max-width:50%;object-fit:contain;user-select:none;display:block;}
+#slb-r.hidden{display:none;}
+#slb-r.hidden ~ #slb-l,#slb-r.hidden + #slb-l{max-width:70%;}
+.slb-arr{position:absolute;top:50%;transform:translateY(-50%);font-size:22px;color:rgba(237,235,231,.4);background:rgba(13,13,13,.7);border:1px solid var(--border);border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;cursor:none;transition:color .2s,background .2s;user-select:none;}
+.slb-arr:hover{color:var(--amber2);background:rgba(13,13,13,.95);}
+#slb-prev{left:6px;}
+#slb-next{right:6px;}
+.slb-strip{display:flex;gap:2px;padding:8px 10px;overflow-x:auto;background:#080808;border-top:1px solid var(--border);flex-shrink:0;}
+.slb-th{width:80px;height:54px;object-fit:contain;background:var(--surface);opacity:.38;cursor:none;transition:opacity .2s;border:1px solid transparent;flex-shrink:0;}
+.slb-th.on{opacity:1;border-color:var(--amber);}
+
+/* ══════════════════════
+   CERTIFICATES
+══════════════════════ */
+#panel-certs{padding-top:110px;background:var(--ink);}
+.cert-head{padding:52px 56px 40px;border-bottom:1px solid var(--border);}
+.cert-head h2{font-size:clamp(36px,6vw,80px);font-weight:800;line-height:.92;letter-spacing:-.03em;color:var(--text);}
+.cert-head h2 em{font-style:normal;color:var(--amber);}
+.cert-g{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:2px;}
+.cert{background:var(--surface);padding:38px 32px;position:relative;overflow:hidden;}
+.cert::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.cert.g::before{background:linear-gradient(90deg,var(--amber),var(--amber2));}
+.cert.s::before{background:linear-gradient(90deg,var(--sage),var(--sage2));}
+.cert.w::before{background:linear-gradient(90deg,#444,#777);}
+.cert-yr{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--amber2);margin-bottom:10px;}
+.cert-org{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);margin-bottom:8px;}
+.cert-name{font-size:17px;font-weight:800;line-height:1.2;color:var(--text);margin-bottom:10px;}
+.cert-desc{font-size:12px;color:var(--dim);line-height:1.72;}
+.cert-ico{position:absolute;right:18px;bottom:14px;font-size:36px;opacity:.05;}
+.letter-sec{padding:50px 56px 58px;}
+.letter-sec h3{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:20px;}
+.letter-wrap{background:var(--surface);padding:20px;max-width:760px;}
+.letter-wrap img{width:100%;display:block;border:1px solid var(--border);}
+
+/* ══════════════════════
+   RECOMMENDERS
+══════════════════════ */
+#panel-rec{padding-top:110px;background:var(--ink);}
+.rec-head{padding:52px 56px 40px;border-bottom:1px solid var(--border);}
+.rec-head h2{font-size:clamp(36px,6vw,80px);font-weight:800;line-height:.92;letter-spacing:-.03em;color:var(--text);}
+.rec-head h2 em{font-style:normal;color:var(--amber);}
+.rec-head p{font-size:14px;color:var(--muted);margin-top:14px;max-width:520px;line-height:1.75;}
+.rec-g{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;padding:2px;}
+.rec{background:var(--surface);padding:38px 34px;position:relative;}
+.rec::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--amber);}
+.rec-av{width:52px;height:52px;background:rgba(196,125,40,.12);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:var(--amber2);margin-bottom:16px;border:1px solid rgba(196,125,40,.2);}
+.rec-n{font-size:18px;font-weight:800;color:var(--text);margin-bottom:3px;}
+.rec-r{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--amber2);margin-bottom:3px;}
+.rec-o{font-size:12px;color:var(--dim);margin-bottom:16px;}
+.rec-links{display:flex;flex-direction:column;gap:6px;}
+.rec-links a{font-size:12px;color:var(--dim);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s;cursor:none;}
+.rec-links a:hover{color:var(--amber2);}
+.rec-q{font-size:13px;color:rgba(237,235,231,.5);line-height:1.75;font-style:italic;margin-top:16px;padding-top:14px;border-top:1px solid var(--border);}
+
+/* ══════════════════════
+   CONNECT
+══════════════════════ */
+#panel-connect{padding-top:110px;background:var(--ink);}
+.con-head{padding:52px 56px 40px;border-bottom:1px solid var(--border);}
+.con-head h2{font-size:clamp(36px,6vw,80px);font-weight:800;line-height:.92;letter-spacing:-.03em;color:var(--text);}
+.con-head h2 em{font-style:normal;color:var(--amber);}
+.con-head p{font-size:14px;color:var(--muted);margin-top:14px;line-height:1.75;max-width:480px;}
+.con-sec{padding:58px 56px;border-top:1px solid var(--border);}
+.con-sec h3{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:20px;}
+.con-items{display:flex;flex-direction:column;gap:2px;}
+.con-item{display:flex;align-items:center;justify-content:space-between;padding:20px 28px;background:var(--surface);}
+.con-item-l h4{font-size:15px;font-weight:700;color:var(--text);margin-bottom:3px;}
+.con-item-l p{font-size:12px;color:var(--dim);}
+.con-btn{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:10px 18px;border:1px solid var(--border);color:var(--text);text-decoration:none;transition:background .2s,border-color .2s,color .2s;cursor:none;flex-shrink:0;}
+.con-btn:hover{background:var(--amber);border-color:var(--amber);color:var(--ink);}
+.con-foot{padding:44px 56px;border-top:1px solid var(--border);background:#080808;text-align:center;}
+.con-foot p{font-size:12px;color:var(--dim);}
+.nextbar{display:flex;justify-content:flex-end;align-items:center;padding:30px 56px 40px;border-top:1px solid var(--border);background:var(--ink);}
+
+/* ══════════════════════
+   EXPERIMENTAL
+══════════════════════ */
+#panel-experimental{padding-top:110px;background:var(--ink);}
+.exp-head{padding:52px 56px 40px;border-bottom:1px solid var(--border);}
+.exp-head h2{font-size:clamp(36px,6vw,80px);font-weight:800;line-height:.92;letter-spacing:-.03em;color:var(--text);}
+.exp-head h2 em{font-style:normal;color:var(--amber);}
+.exp-head p{font-size:14px;color:var(--muted);margin-top:14px;line-height:1.75;max-width:580px;}
+.exp-grid{display:flex;flex-direction:column;gap:2px;padding:0 56px 80px;}
+.exp-item{background:var(--surface);padding:40px;}
+.exp-item-label{font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);margin-bottom:14px;}
+.exp-item-title{font-size:clamp(20px,2.1vw,28px);font-weight:700;line-height:1.1;letter-spacing:-.02em;color:var(--text);margin-bottom:14px;}
+.exp-item-desc{font-size:14px;font-weight:300;line-height:1.8;color:var(--muted);max-width:680px;margin-bottom:26px;}
+.exp-item-desc strong{color:var(--text);font-weight:600;}
+.exp-item-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;}
+.exp-item-meta span{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--amber2);border:1px solid var(--border);padding:7px 13px;}
+.exp-item video{width:100%;display:block;max-height:70vh;object-fit:contain;background:#000;}
+
+/* Project list contribution tags */
+.pl-contrib{margin-top:16px;padding-top:14px;border-top:1px solid var(--border);}
+.pl-contrib-lbl{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--amber2);margin-bottom:10px;}
+.pl-contrib-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.pl-contrib-tags span{font-size:11px;color:var(--muted);background:rgba(255,255,255,.04);padding:5px 11px;border:1px solid var(--border);line-height:1.4;}
+
+/* Project list / professional works placeholders */
+.pl-ph{width:100%;aspect-ratio:16/10;background:linear-gradient(135deg,#1a1a1a,#111);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border:1px solid var(--border);text-align:center;padding:24px;}
+.pl-ph-name{font-size:13px;font-weight:700;color:var(--text);line-height:1.3;}
+.pl-ph-sub{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);}
+.pw-ph{width:100%;height:160px;background:linear-gradient(135deg,#1a1a1a,#111);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1px solid var(--border);text-align:center;padding:16px;}
+.pw-ph-name{font-size:11px;font-weight:700;color:var(--text);}
+.pw-ph-sub{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);}
+
+/* UTILS */
+@keyframes fup{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+@keyframes pulse{0%,100%{opacity:.28;}50%{opacity:1;}}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+@media(max-width:860px){
+  .ab-grid,.aw-g,.rec-g,.edu-g,.sk-g,.res-g,.cert-g{grid-template-columns:1fr;}
+  #nav,.con-sec,.con-head,.cert-head,.rec-head,.port-head,.spreads-col,.proj-section,.letter-sec,.cs,.site-ft,.con-foot{padding-left:20px;padding-right:20px;}
+  .spreads-col{padding:10px 20px 32px;}
+}
+</style>
+</head>
+<body>
+<div id="cur"></div>
+<div id="cur-r"></div>
+<div id="prog"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="n-logo" href="#" onclick="goHome();return false;">AM</a>
+  <div class="n-right">
+    <span class="n-info">Klai Juba Wald · UNLV Instructor</span>
+    <a class="n-cta" href="#" onclick="switchTab('connect');return false;">Get in Touch</a>
+  </div>
+</nav>
+
+<!-- TABS — 7, text only -->
+<div id="tabs">
+  <button class="tb active" onclick="switchTab('home')" data-tab="home"><span>Home</span></button>
+  <button class="tb" onclick="switchTab('cv')" data-tab="cv"><span>CV</span></button>
+  <button class="tb" onclick="switchTab('projects')" data-tab="projects"><span>Project List</span></button>
+  <button class="tb" onclick="switchTab('portfolio')" data-tab="portfolio"><span>Portfolio</span></button>
+  <button class="tb" onclick="switchTab('certs')" data-tab="certs"><span>Awards &amp; Certs</span></button>
+  <button class="tb" onclick="switchTab('rec')" data-tab="rec"><span>Recommenders</span></button>
+  <button class="tb" onclick="switchTab('experimental')" data-tab="experimental"><span>Experimental</span></button>
+</div>
+
+<!-- ════ HOME ════ -->
+<div id="panel-home" class="panel active">
+  <section id="v-sec" class="snap">
+    <video id="bg-vid" autoplay muted loop playsinline><source src="assets/video/arsalan-portrait.mp4" type="video/mp4"/></video>
+    <div class="v-g1"></div><div class="v-g2"></div>
+    <div class="v-body">
+      <p class="v-eye">Architect · Researcher · Educator · Las Vegas, NV</p>
+      <h1 class="v-name">Arsalan<br/><em>Mirsadraei</em></h1>
+      <p class="v-desc">Architecture at the intersection of narrative and delivery — from concept through construction documents on landmark hospitality projects.</p>
+      <div class="v-acts">
+        <a class="v-btn v-btn-p" href="#" onclick="goToAbout();return false;">About Me ↓</a>
+        <a class="v-btn v-btn-s" href="#" onclick="switchTab('portfolio');return false;">View Portfolio</a>
+      </div>
+    </div>
+    <div style="position:absolute;right:52px;bottom:36px;z-index:2;display:flex;flex-direction:column;align-items:center;gap:0;opacity:0;animation:fup .7s ease 1s forwards;">
+      <span style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);">Scroll</span>
+      <div class="v-line"></div>
+    </div>
+  </section>
+
+  <section id="ab-sec" class="snap">
+    <p class="eye">About</p>
+    <h2 class="ab-title">Designing spaces<br/>that perform<br/>&amp; resonate.</h2>
+    <div class="ab-grid">
+      <div class="ab-bio">
+        <p>I am an architect and educator based in Las Vegas — currently at Klai Juba Wald Architects + Interiors, contributing to landmark hospitality projects including the Guitar Tower at Hard Rock Las Vegas, LVCC Phase III, Hard Rock Athens, and Hard Rock San Juan.</p>
+        <p>My practice bridges two disciplines: precision delivery of construction documents on billion-dollar projects, and the intellectual rigor of research-led design. I hold dual M.Arch degrees in Hospitality &amp; Entertainment Design (UNLV) and Digital Architecture Technology (Pars University, Tehran).</p>
+        <p>As Instructor at UNLV's College of Architecture, Planning, and Public Affairs, I teach architectural design studios while actively pursuing ARE licensure.</p>
+        <div class="creds">
+          <div class="cred"><div class="cred-txt"><strong>ARCC King Student Medal · 2023</strong>National recognition for innovation and scholarship in architectural research.</div></div>
+          <div class="cred"><div class="cred-txt"><strong>AIA Las Vegas Scholarship · 2023</strong>For the 2023–2024 academic year at UNLV.</div></div>
+          <div class="cred"><div class="cred-txt"><strong>PHI KAPPA PHI Honor Society</strong>Member — recognition of academic excellence.</div></div>
+        </div>
+        <a class="cv-cta" href="#" onclick="switchTab('cv');return false;">→ View Full CV</a>
+      </div>
+      <div>
+        <div class="stats">
+          <div class="st-box"><div class="st-n">8<span style="font-size:22px">yr</span></div><div class="st-l">Iran Practice</div><div style="font-size:10px;color:#9B968C;margin-top:3px;">2014 – 2022</div></div>
+          <div class="st-box"><div class="st-n">3<span style="font-size:22px">yr</span></div><div class="st-l">US Practice</div><div style="font-size:10px;color:#9B968C;margin-top:3px;">2022 – Present</div></div>
+          <div class="st-box"><div class="st-n">2+</div><div class="st-l">M.Arch Degrees</div></div>
+          <div class="st-box"><div class="st-n">3</div><div class="st-l">Publications</div></div>
+          <div class="st-box st-span"><div class="st-n">4</div><div class="st-l">Awards &amp; Scholarships</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="nextbar" style="scroll-snap-align:start;">
+    <a class="co-l" href="#" onclick="switchTab('cv');return false;">CV →</a>
+  </div>
+</div>
+
+<!-- ════ CV ════ -->
+<div id="panel-cv" class="panel">
+  <div class="mq"><div class="mq-inner">
+    <span class="mq-s">Hospitality Design</span><span class="mq-d">·</span><span class="mq-s">High-Rise Architecture</span><span class="mq-d">·</span><span class="mq-s">Computational Design</span><span class="mq-d">·</span><span class="mq-s">Hard Rock Las Vegas</span><span class="mq-d">·</span><span class="mq-s">LVCC Phase III</span><span class="mq-d">·</span><span class="mq-s">ARCC Medal</span><span class="mq-d">·</span><span class="mq-s">UNLV Instructor</span><span class="mq-d">·</span><span class="mq-s">Performance-Based Design</span><span class="mq-d">·</span><span class="mq-s">Hospitality Design</span><span class="mq-d">·</span><span class="mq-s">High-Rise Architecture</span><span class="mq-d">·</span><span class="mq-s">Computational Design</span><span class="mq-d">·</span><span class="mq-s">Hard Rock Las Vegas</span><span class="mq-d">·</span><span class="mq-s">LVCC Phase III</span><span class="mq-d">·</span><span class="mq-s">ARCC Medal</span><span class="mq-d">·</span><span class="mq-s">UNLV Instructor</span><span class="mq-d">·</span><span class="mq-s">Performance-Based Design</span><span class="mq-d">·</span>
+  </div></div>
+
+  <div class="cs dk">
+    <p class="cs-eye">Professional Experience</p>
+    <h2 class="cs-title">Where I've delivered work.</h2>
+    <div class="tl" id="tl">
+      <div class="tl-track"><div class="tl-fill"></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-dt">2024 – Present</div><div class="tl-loc">Las Vegas, NV</div><div class="tl-role">Instructor — Part Time</div><div class="tl-org">University of Nevada, Las Vegas</div><div class="tl-desc">Teaching architectural design studios in CAPA. Courses: AAE 770, AAE 660, AAE 789, AAE 790.</div><div class="tags"><span class="tag">Pedagogy</span><span class="tag">Design Studio</span><span class="tag">Graduate Instruction</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-dt">Sep 2023 – Present</div><div class="tl-loc">Las Vegas, NV</div><div class="tl-role">Architectural Production</div><div class="tl-org">Klai Juba Wald Architects + Interiors</div><div class="tl-desc">Construction documents for Guitar Tower (Hard Rock Las Vegas), LVCC Phase III, Hard Rock Athens &amp; San Juan. Coordinating consultants, reviewing submittals, ensuring code compliance.</div><div class="tags"><span class="tag">Construction Documents</span><span class="tag">Revit</span><span class="tag">Hospitality</span><span class="tag">Hard Rock LV</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-dt">2022 – Present</div><div class="tl-loc">Las Vegas, NV</div><div class="tl-role">Graduate Assistantship</div><div class="tl-org">University of Nevada, Las Vegas</div><div class="tl-desc">Research tasks, administrative support, and campus event organization under Prof. Steffen Lehmann.</div><div class="tags"><span class="tag">Research</span><span class="tag">Academic Support</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-dt">Summer 2023</div><div class="tl-loc">Las Vegas, NV</div><div class="tl-role">Architecture Intern</div><div class="tl-org">Steelman Partners</div><div class="tl-desc">Project development and documentation across entertainment and casino-resort portfolio.</div><div class="tags"><span class="tag">Entertainment Design</span><span class="tag">Casino Resort</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-dt">2020 – 2022</div><div class="tl-loc">Tehran, Iran</div><div class="tl-role">CG Artist</div><div class="tl-org">Polygon Group</div><div class="tl-desc">3D modeling for augmented reality content and construction project visualization.</div><div class="tags"><span class="tag">3D Modeling</span><span class="tag">AR</span></div></div>
+      <div class="tl-item"><div class="tl-dot"></div><div class="tl-dt">2017 – 2021</div><div class="tl-loc">Tehran, Iran</div><div class="tl-role">Architect Assistant + Office Engineer</div><div class="tl-org">Green Hayat</div><div class="tl-desc">Design, supervision, quality control, contract management, and budget monitoring.</div><div class="tags"><span class="tag">Project Management</span><span class="tag">Construction</span></div></div>
+    </div>
+  </div>
+
+  <div class="cs lt">
+    <p class="cs-eye">Academic Background</p>
+    <h2 class="cs-title">Education.</h2>
+    <div class="edu-g">
+      <div class="edu-c"><div class="edu-badge">M.Arch — In Progress</div><div class="edu-deg">Hospitality &amp; Entertainment Design</div><div class="edu-school">University of Nevada, Las Vegas</div><div class="edu-yr">2022 – Present · Las Vegas, NV</div><div class="edu-note">Robot-supported QSR layouts, revenue-generating hospitality design, entertainment typology.</div><div class="edu-n">01</div></div>
+      <div class="edu-c" style="transition-delay:.12s"><div class="edu-badge">M.Arch · GPA 17.88/20</div><div class="edu-deg">Digital Architecture Technology</div><div class="edu-school">Pars University, Tehran</div><div class="edu-yr">2016 – 2019 · Tehran, Iran</div><div class="edu-note">Computational modeling of elevators and refuge floors.</div><div class="edu-n">02</div></div>
+      <div class="edu-c" style="transition-delay:.24s"><div class="edu-badge">B.Arch Engineering</div><div class="edu-deg">Architecture Engineering</div><div class="edu-school">Islamic Azad University, Tehran</div><div class="edu-yr">2009 – 2014 · Tehran, Iran</div><div class="edu-note">Iran pavilion design for Expo 2015 Milan.</div><div class="edu-n">03</div></div>
+    </div>
+  </div>
+
+  <div class="cs sf">
+    <p class="cs-eye">Technical Proficiency</p>
+    <h2 class="cs-title">Tools &amp; Software.</h2>
+    <!-- Scale legend: bars go to 100% = Expert; Advanced marker at 75% -->
+    <div style="margin-bottom:28px;padding:14px 0 0;">
+      <div style="position:relative;height:3px;background:var(--border);border-radius:2px;max-width:680px;">
+        <div style="position:absolute;left:0;top:0;height:100%;width:40%;background:rgba(74,122,88,.35);"></div>
+        <div style="position:absolute;left:40%;top:0;height:100%;width:18%;background:rgba(74,122,88,.55);"></div>
+        <div style="position:absolute;left:58%;top:0;height:100%;width:17%;background:rgba(196,125,40,.5);"></div>
+        <div style="position:absolute;left:75%;top:0;height:100%;width:25%;background:rgba(196,125,40,.15);border:1px dashed rgba(232,164,64,.3);box-sizing:border-box;"></div>
+        <div style="position:absolute;left:40%;top:-18px;transform:translateX(-50%);font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);">INT</div>
+        <div style="position:absolute;left:58%;top:-18px;transform:translateX(-50%);font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);">PROF</div>
+        <div style="position:absolute;left:75%;top:-18px;transform:translateX(-50%);font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);">ADVANCED</div>
+        <div style="position:absolute;right:0;top:-18px;font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);">EXPERT ↗</div>
+      </div>
+      <p style="font-size:10px;color:var(--dim);margin-top:12px;font-style:italic;">Advanced is current ceiling — the empty bar beyond shows room to grow toward Expert.</p>
+    </div>
+    <div class="sk-g">
+      <div class="sg"><div class="sg-lbl">BIM + CAD</div>
+        <div class="sk"><div class="sk-name">Autodesk Revit<span>Advanced</span></div><div class="sk-bar"><div class="sk-fill" style="--w:75%"></div></div></div>
+        <div class="sk"><div class="sk-name">AutoCAD<span>Advanced</span></div><div class="sk-bar"><div class="sk-fill" style="--w:75%"></div></div></div>
+        <div class="sk"><div class="sk-name">SketchUp<span>Proficient</span></div><div class="sk-bar"><div class="sk-fill" style="--w:58%"></div></div></div>
+        <div class="sk"><div class="sk-name">Bluebeam<span>Proficient</span></div><div class="sk-bar"><div class="sk-fill" style="--w:58%"></div></div></div>
+      </div>
+      <div class="sg" style="transition-delay:.08s"><div class="sg-lbl">Computation</div>
+        <div class="sk"><div class="sk-name">Rhinoceros<span>Advanced</span></div><div class="sk-bar"><div class="sk-fill" style="--w:75%"></div></div></div>
+        <div class="sk"><div class="sk-name">Grasshopper<span>Proficient</span></div><div class="sk-bar"><div class="sk-fill" style="--w:60%"></div></div></div>
+        <div class="sk"><div class="sk-name">Pathfinder<span>Proficient</span></div><div class="sk-bar"><div class="sk-fill" style="--w:58%"></div></div></div>
+        <div class="sk"><div class="sk-name">3Ds Max<span>Intermediate</span></div><div class="sk-bar"><div class="sk-fill" style="--w:40%"></div></div></div>
+      </div>
+      <div class="sg" style="transition-delay:.16s"><div class="sg-lbl">Visualization</div>
+        <div class="sk"><div class="sk-name">Twinmotion<span>Advanced</span></div><div class="sk-bar"><div class="sk-fill" style="--w:75%"></div></div></div>
+        <div class="sk"><div class="sk-name">V-Ray<span>Proficient</span></div><div class="sk-bar"><div class="sk-fill" style="--w:58%"></div></div></div>
+        <div class="sk"><div class="sk-name">Lumion<span>Proficient</span></div><div class="sk-bar"><div class="sk-fill" style="--w:58%"></div></div></div>
+        <div class="sk"><div class="sk-name">Keyshot<span>Intermediate</span></div><div class="sk-bar"><div class="sk-fill" style="--w:40%"></div></div></div>
+      </div>
+      <div class="sg" style="transition-delay:.24s"><div class="sg-lbl">Adobe + Media</div>
+        <div class="sk"><div class="sk-name">Photoshop<span>Advanced</span></div><div class="sk-bar"><div class="sk-fill" style="--w:75%"></div></div></div>
+        <div class="sk"><div class="sk-name">Illustrator<span>Advanced</span></div><div class="sk-bar"><div class="sk-fill" style="--w:75%"></div></div></div>
+        <div class="sk"><div class="sk-name">Final Cut Pro<span>Intermediate</span></div><div class="sk-bar"><div class="sk-fill" style="--w:40%"></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs dk">
+    <p class="cs-eye">Recognition</p>
+    <h2 class="cs-title">Awards &amp; Publications.</h2>
+    <div class="aw-g">
+      <div>
+        <p style="font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;">Awards &amp; Scholarships</p>
+        <div class="aw-items">
+          <div class="aw-item"><div class="aw-yr">2023</div><div><div class="aw-t">ARCC King Student Medal</div><div class="aw-d">National recognition for innovation, integrity, and scholarship in architectural and environmental design research.</div></div></div>
+          <div class="aw-item" style="transition-delay:.08s"><div class="aw-yr">2023</div><div><div class="aw-t">AIA Las Vegas Scholarship</div><div class="aw-d">For the 2023–2024 academic year at University of Nevada Las Vegas.</div></div></div>
+          <div class="aw-item" style="transition-delay:.16s"><div class="aw-yr">2022</div><div><div class="aw-t">Academic Excellence Award</div><div class="aw-d">Architectural Graduate Studies — UNLV School of Architecture.</div></div></div>
+          <div class="aw-item" style="transition-delay:.24s"><div class="aw-yr">2023</div><div><div class="aw-t">SoA Faculty Book Recognition</div><div class="aw-d">Chapter authorship in "Trans-Atlantic Engagements" by Steffen Lehmann.</div></div></div>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--sage2);margin-bottom:12px;">Publications</p>
+        <div class="pub-items">
+          <div class="pub-item"><div class="pub-type">Peer-Reviewed · First Author · 2023</div><div class="pub-t">"How Interior Layout Could Be Changed in Robot-Supported Quick Service Restaurants"</div><div class="pub-m">WFCHRIE Hospitality Education Conference · With Dr. Mehmet Erdem &amp; Glenn Nowak.</div></div>
+          <div class="pub-item" style="transition-delay:.1s"><div class="pub-type">Book Chapter · 2023</div><div class="pub-t">Chapter in "Trans-Atlantic Engagements"</div><div class="pub-m">Edited by Prof. Steffen Lehmann · UNLV School of Architecture.</div></div>
+          <div class="pub-item" style="transition-delay:.2s"><div class="pub-type">Conference Presentation</div><div class="pub-t">Solutions for Evacuation in Commercial High-Rise Buildings</div><div class="pub-m">Milad Tower International Conference Center, Tehran.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs sf">
+    <p class="cs-eye">Areas of Focus</p>
+    <h2 class="cs-title">Research Interests.</h2>
+    <div class="res-g">
+      <div class="rc"><div class="rc-icon">🏨</div><div class="rc-t">Hospitality &amp; Entertainment Architecture</div><div class="rc-d">Revenue-generating design for casino-resorts, hotels, entertainment. Robot-supported service environments.</div></div>
+      <div class="rc" style="transition-delay:.08s"><div class="rc-icon">🌿</div><div class="rc-t">Sustainable + Biophilic Design</div><div class="rc-d">CLT hybrid structures, sky gardens, passive systems. Embodied carbon reduction as architectural strategy.</div></div>
+      <div class="rc" style="transition-delay:.16s"><div class="rc-icon">🏙️</div><div class="rc-t">High-Rise + Vertical Architecture</div><div class="rc-d">Computational tall-building design. Refuge floors, evacuation modeling with Pathfinder simulation.</div></div>
+      <div class="rc" style="transition-delay:.24s"><div class="rc-icon">⚙️</div><div class="rc-t">Performance-Based Design</div><div class="rc-d">Evidence-based decisions. Evacuation simulation, accessibility, code compliance from concept through CDs.</div></div>
+      <div class="rc" style="transition-delay:.32s"><div class="rc-icon">🏡</div><div class="rc-t">Residential &amp; Interior Design</div><div class="rc-d">Spatial quality, material authenticity, human-scale detail in residential and interior typologies.</div></div>
+      <div class="rc" style="transition-delay:.4s"><div class="rc-icon">💻</div><div class="rc-t">Computational Architecture</div><div class="rc-d">Parametric design (Rhino/Grasshopper), real-time visualization, Arduino integration, generative processes.</div></div>
+    </div>
+  </div>
+
+  <div class="cs dk" id="cv-contact">
+    <p class="cs-eye">Let's Connect</p>
+    <h2 class="co-head">Open to<br/><em>new opportunities.</em></h2>
+    <p class="co-sub">Whether you're a firm looking for a delivery-focused architect with research depth, or a collaborator on a competition — I'd love to hear from you.</p>
+    <div class="co-ls">
+      <a class="co-l" href="#" onclick="switchTab('connect');return false;">Get in Touch →</a>
+    </div>
+  </div>
+  <div class="nextbar">
+    <a class="co-l" href="#" onclick="switchTab('projects');return false;">Project List →</a>
+  </div>
+  <footer class="site-ft"><p>© 2026 Arsalan Mirsadraei · Architect · UNLV Instructor · ARCC Medal</p><a href="#" onclick="switchTab('cv');return false;">↑ Top</a></footer>
+</div>
+
+<!-- ════ PORTFOLIO ════ -->
+<div id="panel-portfolio" class="panel">
+  <div class="port-head">
+    <p class="eye">Architecture 2015–2025</p>
+    <h2>Selected <em>Works.</em></h2>
+    <p>Portfolio shown as spreads — 8 academic + competition projects, pages 9–57. Click any spread to view full-screen.</p>
+  </div>
+  <div id="portfolio-container"></div>
+
+  <div class="nextbar">
+    <a class="co-l" href="#" onclick="switchTab('certs');return false;">Awards &amp; Certs →</a>
+  </div>
+</div>
+
+<!-- SPREAD LIGHTBOX -->
+<div id="slb">
+  <div class="slb-top">
+    <span class="slb-title" id="slb-title"></span>
+    <span class="slb-count" id="slb-count"></span>
+    <button class="slb-x" onclick="closeSLB()">✕</button>
+  </div>
+  <div class="slb-body">
+    <img id="slb-l" alt=""/>
+    <img id="slb-r" alt=""/>
+    <div class="slb-arr" id="slb-prev" onclick="slbNav(-1)">‹</div>
+    <div class="slb-arr" id="slb-next" onclick="slbNav(1)">›</div>
+  </div>
+  <div class="slb-strip" id="slb-strip"></div>
+</div>
+
+<!-- ════ PROJECT LIST ════ -->
+<div id="panel-projects" class="panel">
+  <div class="pl-head">
+    <p class="eye">Klai Juba Wald Architects + Interiors · 2023 – Present</p>
+    <h2>Professional <em>Project List.</em></h2>
+    <p>Projects I have contributed to in a professional capacity — from Schematic Design through Construction Documents — across hospitality, convention, and resort typologies.</p>
+  </div>
+
+  <!-- Project 01 -->
+  <div class="pl-item">
+    <div class="pl-info">
+      <div>
+        <div class="pl-num">Project 01 · Design Development</div>
+        <div class="pl-name">Hard Rock Hotel &amp; Casino Athens</div>
+        <div class="pl-firm">Klai Juba Wald · Ellinikou, Greece</div>
+        <div class="pl-desc">Supported the team during Design Development for the Hard Rock integrated resort complex in Ellinikou, Greece — one of the most significant hospitality developments in the Eastern Mediterranean. Responsibilities included drawing set support, detail coordination, and annotations across multiple discipline packages.</div>
+        <div class="pl-contrib">
+          <div class="pl-contrib-lbl">My Contributions</div>
+          <div class="pl-contrib-tags">
+            <span>Drawing Set Support</span>
+            <span>Detail Coordination</span>
+            <span>RCP &amp; Partition Plans</span>
+            <span>Consultant Annotation Packages</span>
+            <span>DD Milestone Submissions</span>
+            <span>Cross-Discipline Sheet Review</span>
+          </div>
+        </div>
+      </div>
+      <div class="pl-links">
+        <a class="pl-link" href="https://www.gensler.com/projects/hard-rock-integrated-resort-complex-ellinikou" target="_blank">Gensler — Project Overview</a>
+        <a class="pl-link" href="https://hotel.hardrock.com/news/hard-rock-international-breaks-ground-on-hard-rock-hotel-and-casino-athens/" target="_blank">Hard Rock — Groundbreaking Announcement</a>
+      </div>
+    </div>
+    <div class="pl-preview">
+      <img src="https://hotel.hardrock.com/files/5829/HRHC-athens-groundbreaking.jpg" alt="Hard Rock Athens" loading="lazy"/>
+      <div class="pl-preview-lbl">gensler.com · Project Overview</div>
+    </div>
+  </div>
+
+  <!-- Project 02 -->
+  <div class="pl-item">
+    <div class="pl-preview">
+      <img src="https://images.squarespace-cdn.com/content/v1/685474284b8c5a1130dd74be/a7e7f43b-a261-4dc9-9dfd-1e89b25299bd/Hard+Rock+Hotel+Las+Vegas-1+copy.jpg?format=1500w" alt="Hard Rock Guitar Tower Las Vegas" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+      <div class="pl-ph" style="display:none"><div class="pl-ph-name">Hard Rock Hotel &amp; Casino Las Vegas</div><div class="pl-ph-sub">Guitar Tower · Las Vegas Strip</div><div class="pl-ph-note">klaijubawald.com · Project Feature</div></div>
+      <div class="pl-preview-lbl">klaijubawald.com · Project Feature</div>
+    </div>
+    <div class="pl-info">
+      <div>
+        <div class="pl-num">Project 02 · Construction Documents</div>
+        <div class="pl-name">Hard Rock Hotel &amp; Casino Las Vegas</div>
+        <div class="pl-firm">Klai Juba Wald · Las Vegas, NV</div>
+        <div class="pl-desc">Supported both the new Guitar Tower and the Mirage tower/casino renovation during Construction Documents phase. Work included detail development, sheet annotations, and cross-discipline coordination. The Guitar Tower is a landmark addition to the Las Vegas Strip, replacing the former Mirage Hotel &amp; Casino.</div>
+        <div class="pl-contrib">
+          <div class="pl-contrib-lbl">My Contributions</div>
+          <div class="pl-contrib-tags">
+            <span>Guitar Tower CDs</span>
+            <span>Mirage Renovation CDs</span>
+            <span>Exterior Envelope Details</span>
+            <span>Interior Partition Coordination</span>
+            <span>MEP &amp; Structural Cross-Check</span>
+            <span>Sheet Annotations &amp; Numbering</span>
+            <span>Specification Coordination</span>
+          </div>
+        </div>
+      </div>
+      <div class="pl-links">
+        <a class="pl-link" href="https://klaijubawald.com/projects/hard-rock-hotel-casino-las-vegas" target="_blank">KJW — Project Feature</a>
+        <a class="pl-link" href="https://www.reviewjournal.com/business/casinos-gaming/construction-of-hard-rocks-guitar-tower-on-pace-for-targeted-opening-3604376/" target="_blank">Las Vegas Review-Journal — Construction Update</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project 03 -->
+  <div class="pl-item">
+    <div class="pl-info">
+      <div>
+        <div class="pl-num">Project 03 · SD + Design Development</div>
+        <div class="pl-name">Hard Rock Hotel &amp; Casino San Juan</div>
+        <div class="pl-firm">Klai Juba Wald · San Juan, Puerto Rico</div>
+        <div class="pl-desc">Assisted during Schematic Design and Design Development phases. Primary focus areas included core &amp; shell coordination and the pool deck scope — a complex multi-level amenity deck central to the resort experience. Coordinated with structural and MEP consultants on deck framing and drainage.</div>
+        <div class="pl-contrib">
+          <div class="pl-contrib-lbl">My Contributions</div>
+          <div class="pl-contrib-tags">
+            <span>Core &amp; Shell Drawings</span>
+            <span>Pool Deck Framing Coordination</span>
+            <span>MEP Deck Integration</span>
+            <span>SD Narrative Documents</span>
+            <span>DD Milestone Drawing Sets</span>
+            <span>Structural Consultant Coordination</span>
+          </div>
+        </div>
+      </div>
+      <div class="pl-links">
+        <a class="pl-link" href="https://www.hardrock.com/blog/hard-rock-international-san-juan-hotel-casino" target="_blank">Hard Rock — San Juan Hotel &amp; Casino</a>
+      </div>
+    </div>
+    <div class="pl-preview">
+      <img src="https://www.hardrock.com/content/dam/shrss/hotel/properties/san-juan/hot-sju-exterior-rendering-1280x854.jpg" alt="Hard Rock San Juan" loading="lazy"/>
+      <div class="pl-preview-lbl">hardrock.com · Hotel Blog</div>
+    </div>
+  </div>
+
+  <!-- Project 04 -->
+  <div class="pl-item">
+    <div class="pl-preview">
+      <img src="assets/projects/lvcc-web.jpg" alt="Las Vegas Convention Center" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+      <div class="pl-ph" style="display:none"><div class="pl-ph-name">Las Vegas Convention Center</div><div class="pl-ph-sub">New Build · SD through CDs</div><div class="pl-ph-note">klaijubawald.com · Project Feature</div></div>
+      <div class="pl-preview-lbl">klaijubawald.com · Project Feature</div>
+    </div>
+    <div class="pl-info">
+      <div>
+        <div class="pl-num">Project 04 · SD through Construction Documents</div>
+        <div class="pl-name">Las Vegas Convention Center</div>
+        <div class="pl-firm">Klai Juba Wald · Las Vegas, NV</div>
+        <div class="pl-desc">Worked on a new ground-up scope for the Las Vegas Convention Center — a separate new-build addition distinct from the full LVCC campus project. Supported the team through Schematic Design, Design Development, and full Construction Documents. Assisted with follow-up renovation scopes and punch walk coordination over the past year.</div>
+        <div class="pl-contrib">
+          <div class="pl-contrib-lbl">My Contributions</div>
+          <div class="pl-contrib-tags">
+            <span>Full SD → DD → CD Delivery</span>
+            <span>Ground-Up New-Build Scope</span>
+            <span>Sheet Set Organization</span>
+            <span>Renovation Follow-Up Scopes</span>
+            <span>Punch Walk Coordination</span>
+            <span>Field Notes &amp; RFI Support</span>
+            <span>Multi-Phase Drawing Management</span>
+          </div>
+        </div>
+      </div>
+      <div class="pl-links">
+        <a class="pl-link" href="https://klaijubawald.com/projects/lvcc" target="_blank">KJW — LVCC Project Feature</a>
+      </div>
+    </div>
+  </div>
+  <div class="nextbar">
+    <a class="co-l" href="#" onclick="switchTab('portfolio');return false;">Portfolio →</a>
+  </div>
+</div>
+
+<!-- ════ CERTIFICATES ════ -->
+<div id="panel-certs" class="panel">
+  <div class="cert-head">
+    <p class="eye">Recognition</p>
+    <h2>Awards &amp;<br/><em>Certificates.</em></h2>
+  </div>
+
+  <!-- ── AWARDS ── -->
+  <div style="padding:0 56px 8px;">
+    <p style="font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);padding:32px 0 14px;border-bottom:1px solid var(--border);">Awards &amp; Scholarships</p>
+  </div>
+  <div class="cert-g">
+    <div class="cert g"><div class="cert-yr">2023</div><div class="cert-org">Architectural Research Centers Consortium</div><div class="cert-name">ARCC King Student Medal</div><div class="cert-desc">National recognition for innovation, integrity, and scholarship in architectural and/or environmental design research. Awarded to the most outstanding student research contribution of the year.</div><div class="cert-ico">🏅</div></div>
+    <div class="cert g"><div class="cert-yr">2023</div><div class="cert-org">American Institute of Architects — Las Vegas</div><div class="cert-name">AIA Las Vegas Scholarship</div><div class="cert-desc">Awarded for the 2023–2024 academic year at UNLV in recognition of academic excellence and professional promise in architecture.</div><div class="cert-ico">🏛</div></div>
+    <div class="cert g"><div class="cert-yr">2022</div><div class="cert-org">UNLV School of Architecture</div><div class="cert-name">Academic Excellence — Architectural Graduate Studies</div><div class="cert-desc">Recognition for outstanding academic performance in the inaugural year of the M.Arch Hospitality &amp; Entertainment Design program at UNLV.</div><div class="cert-ico">🎓</div></div>
+    <div class="cert s"><div class="cert-yr">2023</div><div class="cert-org">PHI KAPPA PHI Honor Society</div><div class="cert-name">Member — Honor Society</div><div class="cert-desc">The nation's most selective all-discipline collegiate honor society. Membership recognizes the top 10% of second-year graduate students.</div><div class="cert-ico">⭐</div></div>
+    <div class="cert s"><div class="cert-yr">2023</div><div class="cert-org">UNLV School of Architecture / Prof. Steffen Lehmann</div><div class="cert-name">SoA Faculty Book Recognition</div><div class="cert-desc">Chapter authorship in "Trans-Atlantic Engagements" — recognized by faculty for scholarly contribution to the publication.</div><div class="cert-ico">📖</div></div>
+  </div>
+
+  <!-- ── CERTIFICATES ── -->
+  <div style="padding:0 56px 8px;margin-top:12px;">
+    <p style="font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);padding:32px 0 14px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);">Certificates &amp; Credentials</p>
+  </div>
+  <div class="cert-g">
+    <div class="cert w"><div class="cert-yr">2016 — Tehran</div><div class="cert-org">3rd Conference on High Rise Building · Milad Tower</div><div class="cert-name">Conference Presentation Certificate</div><div class="cert-desc">Certificate of acceptance, presentation, and attendance for "Solutions for Evacuation in Commercial High-Rise Buildings" at the 3rd Conference on High Rise Building, Milad Tower International Conference Center. Supported by UN-Habitat.</div><div class="cert-ico">🏙️</div></div>
+    <div class="cert s"><div class="cert-yr">2024</div><div class="cert-org">si_architecture + urban design / UNLV SoA</div><div class="cert-name">Contribution Letter — Library Competition</div><div class="cert-desc">Letter from Dr. Steffen Lehmann recognizing contributions to "A House for Books, Music, and Nature" — international competition, Rzeszów, Poland, Spring 2024.</div><div class="cert-ico">📜</div></div>
+    <div class="cert w"><div class="cert-yr">Ongoing</div><div class="cert-org">NCARB</div><div class="cert-name">Architect Registration Examination (ARE)</div><div class="cert-desc">Actively pursuing full licensure. Professional experience at Klai Juba Wald and academic preparation at UNLV align with all examination content areas.</div><div class="cert-ico">📐</div></div>
+  </div>
+
+  <div class="letter-sec">
+    <h3>3rd Conference on High Rise Building · Milad Tower, Tehran · 2016</h3>
+    <div class="letter-wrap"><img src="assets/certs/highrise-conf.png" alt="3rd Conference on High Rise Building — Certificate of acceptance, presentation and attendance, Milad Tower, Tehran"/></div>
+  </div>
+  <div class="nextbar">
+    <a class="co-l" href="#" onclick="switchTab('rec');return false;">Recommenders →</a>
+  </div>
+</div>
+
+<!-- ════ RECOMMENDERS ════ -->
+<div id="panel-rec" class="panel">
+  <div class="rec-head">
+    <p class="eye">Professional Network</p>
+    <h2>Recommenders &amp;<br/><em>References.</em></h2>
+    <p>Professionals who have worked with me directly across practice, academia, and research — available to speak to my qualifications and character.</p>
+  </div>
+  <div style="padding:2px;">
+    <div class="rec-g">
+      <div class="rec"><div class="rec-av">GN</div><div class="rec-n">Glenn Nowak</div><div class="rec-r">Thesis Advisor + Graduate Coordinator</div><div class="rec-o">University of Nevada, Las Vegas · School of Architecture</div><div class="rec-links"><a href="mailto:glenn.nowak@unlv.edu">glenn.nowak@unlv.edu</a></div><div class="rec-q">"Collaborated on the WFCHRIE peer-reviewed paper on robot-supported QSR interiors. Co-supervised the Library + Concert Hall competition thesis project."</div></div>
+      <div class="rec"><div class="rec-av">WH</div><div class="rec-n">William Hallisky</div><div class="rec-r">Design Director</div><div class="rec-o">Steelman Partners · Las Vegas, NV</div><div class="rec-links"><a href="tel:2134483446">213-448-3446</a></div><div class="rec-q">"Supervised internship work on entertainment architecture projects across Steelman's global casino-resort portfolio during Summer 2023."</div></div>
+      <div class="rec"><div class="rec-av">PR</div><div class="rec-n">Phil Rocha</div><div class="rec-r">Project Manager</div><div class="rec-o">Steelman Partners · Las Vegas, NV</div><div class="rec-links"><a href="tel:3057483635">305-748-3635</a></div><div class="rec-q">"Oversaw project documentation and coordination tasks during internship at Steelman Partners in Summer 2023."</div></div>
+      <div class="rec"><div class="rec-av">DO</div><div class="rec-n">Daniel Ortega</div><div class="rec-r">Director</div><div class="rec-o">University of Nevada, Las Vegas · School of Architecture</div><div class="rec-links"><a href="mailto:daniel.ortega@unlv.edu">daniel.ortega@unlv.edu</a></div><div class="rec-q">"Program director familiar with Arsalan's academic performance, research achievements, and professional development throughout the M.Arch program."</div></div>
+    </div>
+  </div>
+  <div class="nextbar">
+    <a class="co-l" href="#" onclick="switchTab('experimental');return false;">Experimental →</a>
+  </div>
+</div>
+
+<!-- ════ CONNECT ════ -->
+<div id="panel-connect" class="panel">
+  <div class="con-head">
+    <p class="eye">Get In Touch</p>
+    <h2>Let's<br/><em>Connect.</em></h2>
+    <p>Open to new roles, collaborations, competitions, and conversations about architecture.</p>
+  </div>
+  <div class="con-sec">
+    <h3>Direct Contact</h3>
+    <div class="con-items">
+      <div class="con-item"><div class="con-item-l"><h4>Email</h4><p>arsalanmirsadraei@gmail.com</p></div><a class="con-btn" href="mailto:arsalanmirsadraei@gmail.com">Send Email</a></div>
+
+      <div class="con-item"><div class="con-item-l"><h4>Phone</h4><p>332 203 2723</p></div><a class="con-btn" href="tel:3322032723">Call</a></div>
+      <div class="con-item"><div class="con-item-l"><h4>LinkedIn</h4><p>linkedin.com/in/arsalanmirsadraei</p></div><a class="con-btn" href="https://www.linkedin.com/in/arsalanmirsadraei/" target="_blank">View Profile</a></div>
+    </div>
+  </div>
+  <div class="con-foot"><p>Arsalan Mirsadraei · Las Vegas, NV · +1 332 203 2723 · arsalanmirsadraei@gmail.com</p></div>
+</div>
+
+<!-- ════ EXPERIMENTAL ════ -->
+<div id="panel-experimental" class="panel">
+  <div class="exp-head">
+    <p class="eye">Motion + Architecture</p>
+    <h2>Experimental<br/><em>Work.</em></h2>
+    <p>A collection of architectural films and video experiments — exploring space, movement, and narrative through the lens.</p>
+  </div>
+  <div class="exp-grid">
+    <div class="exp-item">
+      <div class="exp-item-label">Video 01 · Group Project</div>
+      <h3 class="exp-item-title">Kinetic Sun-Shader — A Façade That Reads the Light</h3>
+      <p class="exp-item-desc">A collaborative experiment in responsive architecture: a kinetic shading screen that measures the sun's intensity and reshapes itself in real time to temper the light it lets through. The geometry was driven by a <strong>Grasshopper</strong> definition wired to an <strong>Arduino</strong> sensing rig, and the working prototype was built entirely from <strong>cardboard</strong> — a deliberately low-fi study of a high-performance idea.</p>
+      <video controls playsinline preload="metadata">
+        <source src="video.mp4" type="video/mp4"/>
+      </video>
+      <div class="exp-item-meta"><span>Grasshopper</span><span>Arduino</span><span>Kinetic Façade</span><span>Cardboard Prototype</span></div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-item-label">Video 02</div>
+      <video controls playsinline preload="metadata">
+        <source src="video-2.mp4" type="video/mp4"/>
+      </video>
+    </div>
+  </div>
+  <div class="nextbar">
+    <a class="co-l" href="#" onclick="switchTab('home');return false;">Back to Home →</a>
+  </div>
+</div>
+
+<script>
+/* ── CURSOR ── */
+const cur=document.getElementById('cur'),curR=document.getElementById('cur-r');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function t(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.11;ry+=(my-ry)*.11;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(t);})();
+document.querySelectorAll('a,button,.spread,.slb-arr,.pw-card,.pl-preview,.pl-link,.pl-ph,.exp-item,.tb').forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));});
+
+/* ── PROGRESS ── */
+const prog=document.getElementById('prog');
+function updProg(){
+  const hp=document.getElementById('panel-home');
+  if(hp.classList.contains('active')&&hp.scrollHeight>hp.clientHeight){prog.style.width=(hp.scrollTop/(hp.scrollHeight-hp.clientHeight)*100)+'%';}
+  else{const m=document.body.scrollHeight-window.innerHeight;prog.style.width=m>0?(window.scrollY/m*100)+'%':'0';}
+}
+document.getElementById('panel-home').addEventListener('scroll',updProg,{passive:true});
+window.addEventListener('scroll',updProg,{passive:true});
+
+/* ── NAV ── */
+document.getElementById('panel-home').addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('on',document.getElementById('panel-home').scrollTop>50),{passive:true});
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('on',window.scrollY>50),{passive:true});
+
+/* ── TAB SWITCHING ── */
+function switchTab(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tb').forEach(b=>b.classList.toggle('active',b.dataset.tab===id));
+  document.getElementById('panel-'+id).classList.add('active');
+  if(id!=='home')window.scrollTo(0,0);
+  if(id==='home'){const v=document.getElementById('bg-vid');if(v)v.play().catch(()=>{});}
+  if(id==='cv')runCVAnims();
+  if((id==='portfolio'||id==='projects')&&!spreadsBuilt)buildSpreads();
+}
+window.switchTab=switchTab;
+function goHome(){switchTab('home');document.getElementById('panel-home').scrollTop=0;}
+function goToAbout(){document.getElementById('ab-sec').scrollIntoView({behavior:'smooth'});}
+window.goHome=goHome;window.goToAbout=goToAbout;
+
+/* ── AUTO-SWITCH TO CV ── */
+let autoSwitchDone=false;
+document.getElementById('panel-home').addEventListener('scroll',()=>{
+  if(autoSwitchDone)return;
+  const ab=document.getElementById('ab-sec');
+  const hp=document.getElementById('panel-home');
+  if(hp.scrollTop+hp.clientHeight>=ab.offsetTop+ab.offsetHeight+60){
+    autoSwitchDone=true;
+    switchTab('cv');
+    setTimeout(()=>{autoSwitchDone=false;},2000);
+  }
+},{passive:true});
+
+/* ── CV ANIMATIONS ── */
+function runCVAnims(){
+  setTimeout(()=>{
+    document.querySelectorAll('#panel-cv .tl-item,#panel-cv .edu-c,#panel-cv .sg,#panel-cv .aw-item,#panel-cv .pub-item,#panel-cv .rc').forEach(el=>{
+      if(el.getBoundingClientRect().top<window.innerHeight+100)el.classList.add('vis');
+    });
+    const tl=document.getElementById('tl');
+    if(tl&&tl.getBoundingClientRect().top<window.innerHeight)tl.classList.add('go');
+  },80);
+}
+window.addEventListener('scroll',()=>{
+  if(!document.getElementById('panel-cv').classList.contains('active'))return;
+  document.querySelectorAll('#panel-cv .tl-item,#panel-cv .edu-c,#panel-cv .sg,#panel-cv .aw-item,#panel-cv .pub-item,#panel-cv .rc').forEach(el=>{
+    if(!el.classList.contains('vis')&&el.getBoundingClientRect().top<window.innerHeight+60)el.classList.add('vis');
+  });
+  const tl=document.getElementById('tl');
+  if(tl&&!tl.classList.contains('go')&&tl.getBoundingClientRect().top<window.innerHeight)tl.classList.add('go');
+},{passive:true});
+
+/* ── BUILD SPREADS ── */
+const PROJECTS=[
+  {num:'01',name:'A House for Books, Music and Trees',sub:'Library + Concert Hall · Rzeszów, Poland · UNLV Thesis 2024',
+   spreads:[[8,9],[10,11],[12,13],[14]]},
+  {num:'02',name:'Legendary Highway 14 Tower',sub:'Civic Monument · De Smet, SD · Competition 2023',
+   spreads:[[null,15],[16,17],[18],[19,20]]},
+  {num:'03',name:'Tili Wini Terroir Wineyard',sub:'Adaptive Reuse · Perugia, Italy · Competition 2023',
+   spreads:[[null,21],[22,23],[24],[25,26]]},
+  {num:'04',name:'Pajouhesh High Rise Building',sub:'Mixed-Use Tower · Tehran · 2019',
+   spreads:[[null,27],[28,29],[30],[31,32]]},
+  {num:'05',name:'Diagonal High Rise Building',sub:'Office Tower · Tehran · 2018',
+   spreads:[[null,33],[34,35],[36],[37,38]]},
+  {num:'06',name:'Farvehar Hospital',sub:'Healthcare Facility · Tehran · 2017',
+   spreads:[[null,39],[40,41],[42],[43,44]]},
+  {num:'07',name:'Movable High-Rise Building',sub:'Kinetic Architecture · Tehran · 2016',
+   spreads:[[null,45],[46],[47,48]]},
+  {num:'08',name:'Roof Yard House',sub:'Residential Tower · Tehran · 2016',
+   spreads:[[null,49],[50,51],[52,53],[54,55],[null,57]]}
+];
+
+let allSpreads=[];
+let spreadsBuilt=false;
+
+function img(n){return 'assets/portfolio/page_'+String(n).padStart(2,'0')+'.jpg';}
+
+function buildSpreads(){
+  spreadsBuilt=true;
+  allSpreads=[];
+  const container=document.getElementById('portfolio-container');
+  container.innerHTML='';
+
+  PROJECTS.forEach(proj=>{
+    const sec=document.createElement('div');
+    sec.className='proj-section';
+    sec.innerHTML=`<div class="proj-num">Project ${proj.num}</div><div class="proj-name">${proj.name}</div><div class="proj-sub">${proj.sub}</div>`;
+    container.appendChild(sec);
+
+    const col=document.createElement('div');
+    col.className='spreads-col';
+
+    proj.spreads.forEach(pages=>{
+      const idx=allSpreads.length;
+      allSpreads.push(pages);
+      const card=document.createElement('div');
+      card.className='spread';
+      card.onclick=()=>openSpread(idx);
+      const real=pages.filter(Boolean);
+      const inner=document.createElement('div');
+      inner.className='spread-inner'+(pages.length===1?' single':'');
+      pages.forEach(p=>{
+        if(p){
+          const im=document.createElement('img');
+          im.src=img(p);im.alt='Page '+p;im.loading='lazy';
+          inner.appendChild(im);
+        }else{
+          const sp=document.createElement('div');
+          sp.style.cssText='width:50%;flex-shrink:0;align-self:stretch;background:var(--ink);';
+          inner.appendChild(sp);
+        }
+      });
+      const over=document.createElement('div');
+      over.className='sp-over';
+      over.innerHTML='<span>Open Full Screen</span>';
+      const num=document.createElement('div');
+      num.className='spread-num';
+      num.textContent=real.length===1?'p.'+real[0]:'pp.'+real[0]+'–'+real[real.length-1];
+      card.appendChild(inner);card.appendChild(over);card.appendChild(num);
+      col.appendChild(card);
+    });
+    container.appendChild(col);
+  });
+
+  document.querySelectorAll('.spread').forEach(el=>{
+    el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+    el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
+  });
+}
+
+/* ── SPREAD LIGHTBOX ── */
+let slbIdx=0;
+function openSpread(idx){slbIdx=idx;renderSLB();document.getElementById('slb').classList.add('open');document.body.style.overflow='hidden';}
+function closeSLB(){document.getElementById('slb').classList.remove('open');document.body.style.overflow='';}
+function slbNav(d){slbIdx=Math.max(0,Math.min(allSpreads.length-1,slbIdx+d));renderSLB();}
+function renderSLB(){
+  const pagesRaw=allSpreads[slbIdx];
+  const pages=pagesRaw.filter(Boolean);
+  const l=document.getElementById('slb-l'),r=document.getElementById('slb-r');
+  l.src=img(pages[0]);
+  if(pages.length>=2){r.src=img(pages[1]);r.classList.remove('hidden');}
+  else{r.src='';r.classList.add('hidden');}
+  document.getElementById('slb-count').textContent=(slbIdx+1)+' / '+allSpreads.length;
+  document.getElementById('slb-title').textContent=pages.length===1?'Page '+pages[0]:'Pages '+pages[0]+' – '+pages[pages.length-1];
+  const strip=document.getElementById('slb-strip');strip.innerHTML='';
+  allSpreads.forEach((sp,i)=>{
+    const t=document.createElement('img');
+    t.className='slb-th'+(i===slbIdx?' on':'');
+    t.src=img(sp.filter(Boolean)[0]);t.loading='lazy';
+    t.onclick=()=>{slbIdx=i;renderSLB();};
+    strip.appendChild(t);
+  });
+  strip.children[slbIdx]?.scrollIntoView({block:'nearest',inline:'center'});
+}
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('slb').classList.contains('open'))return;
+  if(e.key==='ArrowRight')slbNav(1);
+  else if(e.key==='ArrowLeft')slbNav(-1);
+  else if(e.key==='Escape')closeSLB();
+});
+window.openSpread=openSpread;window.closeSLB=closeSLB;window.slbNav=slbNav;
+</script>
+
+<!-- ════ EDIT MODE ════ -->
+<div id="edit-bar">
+  <div id="edit-hint" style="display:none;font-size:10px;color:rgba(196,125,40,.7);text-align:right;line-height:1.6;padding:8px 12px;background:rgba(13,13,13,.9);border:1px solid rgba(196,125,40,.2);max-width:200px;">
+    Click any outlined element<br>to edit it directly.<br>
+    <span style="color:rgba(196,125,40,.5);">Changes live in your browser.</span>
+  </div>
+  <button id="edit-btn" onclick="toggleEdit()">✏ Edit Mode</button>
+  <button id="dl-btn" onclick="downloadSite()" style="display:none;">↓ Download Site</button>
+</div>
+
+<script>
+let editOn=false;
+const EDITABLE=[
+  '.v-eye','.v-name','.v-desc',
+  '.ab-title','.ab-bio p','.cred-txt',
+  '.st-l','.st-n',
+  '.pl-num','.pl-name','.pl-firm','.pl-desc',
+  '.pl-contrib-tags span','.pl-preview-lbl','.pl-head p',
+  '.prof-works-head','.pw-card-name','.pw-card-role','.pw-card-firm',
+  '.cert-yr','.cert-org','.cert-name','.cert-desc',
+  '.rec-n','.rec-r','.rec-o','.rec-q',
+  '.con-item-l h4','.con-item-l p','.con-head p','.con-foot p',
+  '.exp-head p','.exp-item-label',
+  '.proj-name','.proj-sub','.port-head p',
+  '.n-logo','.n-info',
+  '.rec-head p','.cert-head p',
+  '.eye','.letter-sec h3'
+];
+const STYLE=`
+#edit-bar{position:fixed;bottom:28px;right:28px;z-index:99999;display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
+#edit-btn,#dl-btn{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:11px 20px;border:1px solid rgba(196,125,40,.4);cursor:pointer;backdrop-filter:blur(12px);transition:all .2s;}
+#edit-btn{background:rgba(13,13,13,.92);color:#E8A440;}
+#edit-btn:hover{background:rgba(196,125,40,.15);}
+#dl-btn{background:rgba(196,125,40,.18);color:#E8A440;border-color:rgba(196,125,40,.6);}
+#dl-btn:hover{background:rgba(196,125,40,.32);}
+[contenteditable=true]{outline:1px dashed rgba(196,125,40,.45)!important;min-width:20px;min-height:1em;}
+[contenteditable=true]:focus{outline:1px solid rgba(196,125,40,.9)!important;background:rgba(196,125,40,.06);}
+`;
+const styleEl=document.createElement('style');
+styleEl.textContent=STYLE;
+document.head.appendChild(styleEl);
+
+function toggleEdit(){
+  editOn=!editOn;
+  const btn=document.getElementById('edit-btn');
+  const dl=document.getElementById('dl-btn');
+  const hint=document.getElementById('edit-hint');
+  EDITABLE.forEach(sel=>{
+    document.querySelectorAll(sel).forEach(el=>{
+      el.contentEditable=editOn?'true':'false';
+    });
+  });
+  btn.textContent=editOn?'✕ Exit Edit':'✏ Edit Mode';
+  btn.style.background=editOn?'rgba(196,125,40,.15)':'rgba(13,13,13,.92)';
+  dl.style.display=editOn?'block':'none';
+  hint.style.display=editOn?'block':'none';
+}
+
+function downloadSite(){
+  EDITABLE.forEach(sel=>{
+    document.querySelectorAll(sel).forEach(el=>{
+      el.contentEditable='false';
+    });
+  });
+  styleEl.textContent='';
+  document.getElementById('edit-bar').style.display='none';
+  const html='<!DOCTYPE html>\n'+document.documentElement.outerHTML;
+  styleEl.textContent=STYLE;
+  document.getElementById('edit-bar').style.display='flex';
+  if(editOn){
+    EDITABLE.forEach(sel=>{
+      document.querySelectorAll(sel).forEach(el=>{el.contentEditable='true';});
+    });
+  }
+  const blob=new Blob([html],{type:'text/html'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='index.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(a.href);
+}
+window.toggleEdit=toggleEdit;
+window.downloadSite=downloadSite;
+</script>
+
+</body>
+</html>
