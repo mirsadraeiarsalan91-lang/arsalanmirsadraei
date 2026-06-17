@@ -411,6 +411,99 @@ body.hov #cur-r{width:46px;height:46px;border-color:var(--amber);}
   #nav,.con-sec,.con-head,.cert-head,.rec-head,.port-head,.spreads-col,.proj-section,.letter-sec,.cs,.site-ft,.con-foot{padding-left:20px;padding-right:20px;}
   .spreads-col{padding:10px 20px 32px;}
 }
+
+/* ════════════════════════════════════════
+   MOBILE / TOUCH — phone layout (≤760px)
+════════════════════════════════════════ */
+/* Restore the native cursor on touch devices; hide the custom dot */
+@media(hover:none) and (pointer:coarse){
+  *,*::before,*::after{cursor:auto!important;}
+  a,button,.tb,.spread,.slb-arr,.pl-preview,.pl-link,.exp-item,.co-l,.con-btn,.cv-cta,.v-btn{cursor:pointer!important;}
+  #cur,#cur-r{display:none!important;}
+}
+
+@media(max-width:760px){
+  /* NAV */
+  #nav{padding:0 18px;height:58px;}
+  .n-info{display:none;}
+  .n-cta{padding:8px 14px;font-size:10px;}
+
+  /* TABS — swipe-scrollable, natural width per tab */
+  #tabs{top:58px;overflow-x:auto;overflow-y:hidden;justify-content:flex-start;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  #tabs::-webkit-scrollbar{display:none;}
+  .tb{flex:0 0 auto;padding:0 17px;}
+  .tb span{font-size:10.5px;}
+
+  /* combined bar height changes: 58 nav + 48 tabs = 106 */
+  #panel-home{height:calc(100dvh - 106px);margin-top:106px;}
+  #panel-cv,#panel-projects,#panel-portfolio,#panel-certs,#panel-rec,#panel-connect,#panel-experimental{padding-top:106px;}
+
+  /* HERO */
+  .v-body{padding:0 20px 52px;}
+  .v-name{font-size:clamp(46px,15vw,76px);}
+  .v-desc{font-size:14px;margin-bottom:28px;}
+  .v-acts{gap:8px;}
+  .v-btn{padding:11px 17px;}
+  #v-sec > div[style*="right:52px"]{right:18px!important;bottom:24px!important;}
+
+  /* ABOUT */
+  #ab-sec{padding:60px 20px;}
+  .ab-title{margin-bottom:34px;}
+  .ab-grid{gap:38px;}
+
+  /* CV SECTIONS */
+  .cs{padding:54px 20px;}
+  .cs-title{margin-bottom:34px;}
+
+  /* PORTFOLIO SPREADS — stack the two pages vertically, full width */
+  .spreads-col{padding:8px 16px 28px;gap:16px;}
+  .spread-inner{flex-direction:column;}
+  .spread-inner img,.spread-inner.single img{width:100%!important;margin:0!important;}
+  .spread-inner > div[style]{display:none!important;}
+  .sp-over span{font-size:9px;padding:7px 12px;}
+
+  /* PROJECT LIST — force consistent order (info above image) for all */
+  .pl-item{grid-template-columns:1fr;}
+  .pl-info{order:1;padding:40px 20px 28px;}
+  .pl-preview{order:2;min-height:200px;}
+
+  /* SPREAD LIGHTBOX — stack pages */
+  .slb-top{padding:12px 18px;}
+  .slb-body{flex-direction:column;padding:8px 10px;gap:8px;}
+  #slb-l,#slb-r{max-width:100%;max-height:46%;}
+  #slb-r.hidden ~ #slb-l,#slb-r.hidden + #slb-l{max-width:100%;}
+  .slb-arr{width:34px;height:34px;font-size:17px;}
+  #slb-prev{left:3px;}#slb-next{right:3px;}
+  .slb-th{width:58px;height:40px;}
+
+  /* CONTACT */
+  .con-item{flex-direction:column;align-items:flex-start;gap:13px;}
+  .con-item-l p{word-break:break-word;}
+  .con-sec{padding:44px 20px;}
+  .con-head,.cert-head,.rec-head,.port-head,.exp-head,.pl-head{padding:40px 20px 30px;}
+  .con-foot{padding:30px 20px;}
+  .con-foot p{font-size:11px;line-height:1.7;word-break:break-word;}
+
+  /* NEXT-TAB BARS */
+  .nextbar{padding:22px 20px 30px;}
+
+  /* FOOTER */
+  .site-ft{flex-direction:column;gap:10px;text-align:center;padding:20px;}
+
+  /* CERTS / REC inner padding */
+  .cert-g,.rec-g{padding:0;}
+  .cert{padding:30px 22px;}
+  .rec{padding:30px 22px;}
+  .letter-sec{padding:40px 20px 44px;}
+
+  /* EXPERIMENTAL */
+  .exp-grid{padding:0 16px 52px;}
+  .exp-item{padding:26px 20px;}
+
+  /* EDIT BAR */
+  #edit-bar{bottom:16px;right:16px;}
+  #edit-btn,#dl-btn{padding:10px 16px;font-size:10px;}
+}
 </style>
 </head>
 <body>
@@ -829,10 +922,10 @@ body.hov #cur-r{width:46px;height:46px;border-color:var(--amber);}
   </div>
   <div style="padding:2px;">
     <div class="rec-g">
-      <div class="rec"><div class="rec-av">GN</div><div class="rec-n">Glenn Nowak</div><div class="rec-r">Thesis Advisor + Graduate Coordinator</div><div class="rec-o">University of Nevada, Las Vegas · School of Architecture</div><div class="rec-links"><a href="mailto:glenn.nowak@unlv.edu">glenn.nowak@unlv.edu</a></div><div class="rec-q">"Collaborated on the WFCHRIE peer-reviewed paper on robot-supported QSR interiors. Co-supervised the Library + Concert Hall competition thesis project."</div></div>
+      <div class="rec"><div class="rec-av">GN</div><div class="rec-n">Glenn Nowak</div><div class="rec-r">Thesis Advisor + Graduate Coordinator</div><div class="rec-o">University of Nevada, Las Vegas · School of Architecture</div><div class="rec-links"><a href="/cdn-cgi/l/email-protection#33545f565d5d1d5d5c44525873465d5f451d565746"><span class="__cf_email__" data-cfemail="f7909b929999d9999880969cb782999b81d9929382">[email&#160;protected]</span></a></div><div class="rec-q">"Collaborated on the WFCHRIE peer-reviewed paper on robot-supported QSR interiors. Co-supervised the Library + Concert Hall competition thesis project."</div></div>
       <div class="rec"><div class="rec-av">WH</div><div class="rec-n">William Hallisky</div><div class="rec-r">Design Director</div><div class="rec-o">Steelman Partners · Las Vegas, NV</div><div class="rec-links"><a href="tel:2134483446">213-448-3446</a></div><div class="rec-q">"Supervised internship work on entertainment architecture projects across Steelman's global casino-resort portfolio during Summer 2023."</div></div>
       <div class="rec"><div class="rec-av">PR</div><div class="rec-n">Phil Rocha</div><div class="rec-r">Project Manager</div><div class="rec-o">Steelman Partners · Las Vegas, NV</div><div class="rec-links"><a href="tel:3057483635">305-748-3635</a></div><div class="rec-q">"Oversaw project documentation and coordination tasks during internship at Steelman Partners in Summer 2023."</div></div>
-      <div class="rec"><div class="rec-av">DO</div><div class="rec-n">Daniel Ortega</div><div class="rec-r">Director</div><div class="rec-o">University of Nevada, Las Vegas · School of Architecture</div><div class="rec-links"><a href="mailto:daniel.ortega@unlv.edu">daniel.ortega@unlv.edu</a></div><div class="rec-q">"Program director familiar with Arsalan's academic performance, research achievements, and professional development throughout the M.Arch program."</div></div>
+      <div class="rec"><div class="rec-av">DO</div><div class="rec-n">Daniel Ortega</div><div class="rec-r">Director</div><div class="rec-o">University of Nevada, Las Vegas · School of Architecture</div><div class="rec-links"><a href="/cdn-cgi/l/email-protection#6e0a0f00070b0240011c1a0b090f2e1b000218400b0a1b"><span class="__cf_email__" data-cfemail="8ce8ede2e5e9e0a2e3fef8e9ebedccf9e2e0faa2e9e8f9">[email&#160;protected]</span></a></div><div class="rec-q">"Program director familiar with Arsalan's academic performance, research achievements, and professional development throughout the M.Arch program."</div></div>
     </div>
   </div>
   <div class="nextbar">
@@ -850,13 +943,13 @@ body.hov #cur-r{width:46px;height:46px;border-color:var(--amber);}
   <div class="con-sec">
     <h3>Direct Contact</h3>
     <div class="con-items">
-      <div class="con-item"><div class="con-item-l"><h4>Email</h4><p>arsalanmirsadraei@gmail.com</p></div><a class="con-btn" href="mailto:arsalanmirsadraei@gmail.com">Send Email</a></div>
+      <div class="con-item"><div class="con-item-l"><h4>Email</h4><p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b8d9cacbd9d4d9d6d5d1cacbd9dccad9ddd1f8dfd5d9d1d496dbd7d5">[email&#160;protected]</a></p></div><a class="con-btn" href="/cdn-cgi/l/email-protection#78190a0b1914191615110a0b191c0a191d11381f15191114561b1715">Send Email</a></div>
 
       <div class="con-item"><div class="con-item-l"><h4>Phone</h4><p>332 203 2723</p></div><a class="con-btn" href="tel:3322032723">Call</a></div>
       <div class="con-item"><div class="con-item-l"><h4>LinkedIn</h4><p>linkedin.com/in/arsalanmirsadraei</p></div><a class="con-btn" href="https://www.linkedin.com/in/arsalanmirsadraei/" target="_blank">View Profile</a></div>
     </div>
   </div>
-  <div class="con-foot"><p>Arsalan Mirsadraei · Las Vegas, NV · +1 332 203 2723 · arsalanmirsadraei@gmail.com</p></div>
+  <div class="con-foot"><p>Arsalan Mirsadraei · Las Vegas, NV · +1 332 203 2723 · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="87e6f5f4e6ebe6e9eaeef5f4e6e3f5e6e2eec7e0eae6eeeba9e4e8ea">[email&#160;protected]</a></p></div>
 </div>
 
 <!-- ════ EXPERIMENTAL ════ -->
@@ -888,7 +981,7 @@ body.hov #cur-r{width:46px;height:46px;border-color:var(--amber);}
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ── CURSOR ── */
 const cur=document.getElementById('cur'),curR=document.getElementById('cur-r');
 let mx=0,my=0,rx=0,ry=0;
