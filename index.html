@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;cursor:none!important;}
 :root{
@@ -72,16 +73,16 @@ body.hov #cur-r{width:46px;height:46px;border-color:var(--amber);}
 .pl-link:hover{color:var(--text);}
 .pl-link::before{content:'↗';font-size:10px;}
 .pl-preview{position:relative;overflow:hidden;background:var(--surface);min-height:320px;}
-.pl-preview img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s,filter .4s;filter:saturate(.6) brightness(.85);}
-.pl-preview:hover img{transform:scale(1.03);filter:saturate(.9) brightness(.95);}
+.pl-preview img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s,filter .4s;filter:grayscale(1) brightness(.82);}
+.pl-preview:hover img{transform:scale(1.03);filter:grayscale(0) brightness(1);}
 .pl-preview-lbl{position:absolute;bottom:0;left:0;right:0;padding:16px 20px;background:linear-gradient(transparent,rgba(13,13,13,.88));font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);}
 /* Professional works cards in portfolio */
 .prof-works{padding:44px 56px;border-top:1px solid var(--border);margin-top:8px;}
 .prof-works-head{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);margin-bottom:20px;}
 .pw-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;}
 .pw-card{position:relative;overflow:hidden;background:var(--surface);cursor:none;}
-.pw-card img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;transition:transform .5s,filter .4s;filter:saturate(.55) brightness(.8);}
-.pw-card:hover img{transform:scale(1.03);filter:saturate(.9) brightness(.95);}
+.pw-card img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;transition:transform .5s,filter .4s;filter:grayscale(1) brightness(.82);}
+.pw-card:hover img{transform:scale(1.03);filter:grayscale(0) brightness(1);}
 .pw-card-body{padding:20px 22px;}
 .pw-card-firm{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--amber2);margin-bottom:5px;}
 .pw-card-name{font-size:15px;font-weight:800;color:var(--text);line-height:1.2;margin-bottom:6px;}
@@ -123,25 +124,28 @@ body.hov #cur-r{width:46px;height:46px;border-color:var(--amber);}
 .v-line{width:1px;height:38px;background:linear-gradient(to bottom,var(--amber),transparent);animation:pulse 2s ease-in-out infinite;margin-top:5px;}
 
 /* About */
-#ab-sec{min-height:100%;background:var(--cream);color:var(--ink);display:flex;flex-direction:column;justify-content:center;padding:80px 56px;}
+#ab-sec{min-height:100%;background:var(--ink);color:var(--text);display:flex;flex-direction:column;justify-content:center;padding:80px 56px;}
 .eye{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);margin-bottom:10px;}
-.ab-title{font-size:clamp(36px,5.5vw,68px);font-weight:800;line-height:.95;letter-spacing:-.03em;color:var(--ink);margin-bottom:52px;}
+.ab-now{display:flex;align-items:center;gap:10px;margin:24px 0 4px;font-size:12.5px;font-weight:600;line-height:1.5;color:rgba(237,235,231,.6);}
+.ab-now b{color:var(--text);font-weight:700;}
+.ab-now-dot{flex:0 0 auto;width:7px;height:7px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 3px rgba(196,125,40,.16);animation:pulse 2.4s ease-in-out infinite;}
+.ab-title{font-size:clamp(36px,5.5vw,68px);font-weight:800;line-height:.95;letter-spacing:-.03em;color:var(--text);margin-bottom:52px;}
 .ab-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
-.ab-bio p{font-size:15px;line-height:1.82;color:#2A2A2A;margin-bottom:14px;}
-.ab-bio p:first-child{font-size:17px;font-weight:500;line-height:1.65;color:#111;}
+.ab-bio p{font-size:15px;line-height:1.82;color:rgba(237,235,231,.6);margin-bottom:14px;}
+.ab-bio p:first-child{font-size:17px;font-weight:500;line-height:1.65;color:var(--text);}
 .creds{display:flex;flex-direction:column;gap:8px;margin-top:22px;}
-.cred{padding:12px 15px;background:var(--ink);color:var(--text);}
+.cred{padding:12px 15px;background:var(--card);color:var(--text);}
 .cred-txt{font-size:12px;line-height:1.5;color:rgba(237,235,231,.72);}
 .cred-txt strong{display:block;font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--amber2);margin-bottom:3px;}
 .cv-cta{display:inline-flex;align-items:center;gap:9px;margin-top:32px;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--amber);background:none;border:none;cursor:none;padding:0;text-decoration:none;}
 .cv-cta:hover{color:var(--amber2);}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid #D5D0C8;}
-.st-box{padding:26px 22px;border-right:1px solid #D5D0C8;border-bottom:1px solid #D5D0C8;}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);}
+.st-box{padding:26px 22px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);}
 .st-box:nth-child(2n){border-right:none;}
 .st-box:nth-last-child(-n+2){border-bottom:none;}
 .st-span{grid-column:1/-1;border-right:none !important;border-bottom:none !important;}
-.st-n{font-size:46px;font-weight:800;line-height:1;color:#111;letter-spacing:-.03em;}
-.st-l{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#7B7369;margin-top:5px;}
+.st-n{font-size:46px;font-weight:800;line-height:1;color:var(--text);letter-spacing:-.03em;}
+.st-l{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:5px;}
 /* cert section labels */
 .cert-section-lbl{grid-column:1/-1;padding:28px 0 10px;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);border-top:1px solid var(--border);margin-top:4px;}
 .cert-section-lbl:first-child{border-top:none;padding-top:10px;}
@@ -403,8 +407,110 @@ body.hov #cur-r{width:46px;height:46px;border-color:var(--amber);}
 
 /* UTILS */
 @keyframes fup{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+
+/* ══════════════════════
+   TEACHING / STUDENT WORK
+══════════════════════ */
+#panel-teaching{padding-top:110px;background:var(--ink);}
+.tch-head{padding:52px 56px 40px;border-bottom:1px solid var(--border);}
+.tch-head h2{font-size:clamp(36px,6vw,80px);font-weight:800;line-height:.92;letter-spacing:-.03em;color:var(--text);}
+.tch-head h2 em{font-style:normal;color:var(--amber);}
+.tch-head p{font-size:14px;color:var(--muted);margin-top:16px;line-height:1.8;max-width:640px;}
+/* filter chips */
+.tch-filter{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px;}
+.tch-chip{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);background:transparent;border:1px solid var(--border);padding:9px 16px;cursor:none;transition:color .2s,border-color .2s,background .2s;}
+.tch-chip:hover{color:var(--text);border-color:var(--amber2);}
+.tch-chip.on{color:var(--ink);background:var(--amber);border-color:var(--amber);}
+/* cohort */
+.coh{padding:0 56px;}
+.coh:first-of-type{margin-top:48px;}
+.coh+.coh{margin-top:18px;}
+.coh.hide{display:none;}
+.coh-bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;padding-bottom:18px;border-bottom:1px solid var(--border);}
+.coh-logo{display:inline-flex;align-items:center;flex:0 0 auto;padding:8px 12px;background:#fff;border-radius:2px;}
+.coh-logo img{height:38px;width:auto;display:block;}
+.coh-term{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);}
+.coh-title{font-size:clamp(20px,2.4vw,30px);font-weight:800;letter-spacing:-.02em;color:var(--text);line-height:1.05;}
+.coh-course{font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--dim);margin-left:auto;text-transform:uppercase;}
+.coh-note{display:flex;gap:16px;margin:22px 0 36px;max-width:78ch;}
+.coh-note::before{content:'';flex:0 0 2px;background:var(--amber);opacity:.85;}
+.coh-note p{font-size:14px;line-height:1.78;color:var(--muted);}
+.coh-note b{color:var(--text);font-weight:600;}
+/* card grid */
+.tch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:2px;margin-bottom:56px;}
+.tch-card{background:var(--surface);border:1px solid var(--border);overflow:hidden;display:flex;flex-direction:column;cursor:none;transition:border-color .3s,transform .35s cubic-bezier(.2,.7,.2,1);}
+.tch-card:hover{border-color:#3a3a3a;transform:translateY(-4px);}
+.tch-media{position:relative;aspect-ratio:3/2;overflow:hidden;background:#0f0f0f;}
+.tch-media img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1) brightness(.82);transition:transform .6s cubic-bezier(.2,.7,.2,1),filter .4s;}
+.tch-card:hover .tch-media img{transform:scale(1.045);filter:grayscale(0) brightness(1);}
+.tch-media.board img{object-fit:contain;padding:12px;background:radial-gradient(120% 120% at 50% 0%,#1c1c1c,#0d0d0d);}
+.tch-idx{position:absolute;top:12px;left:14px;font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--text);background:rgba(13,13,13,.62);backdrop-filter:blur(3px);padding:5px 10px;}
+.tch-zoom{position:absolute;bottom:12px;right:14px;font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);background:var(--amber2);padding:6px 11px;opacity:0;transform:translateY(6px);transition:opacity .3s,transform .3s;}
+.tch-card:hover .tch-zoom{opacity:1;transform:none;}
+.tch-body{padding:24px 26px 26px;display:flex;flex-direction:column;gap:10px;flex:1;}
+.tch-meta{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--amber2);}
+.tch-title{font-size:clamp(19px,2vw,24px);font-weight:800;letter-spacing:-.02em;line-height:1.12;color:var(--text);}
+.tch-by{font-size:12px;font-weight:600;color:var(--muted);margin-top:-4px;}
+.tch-desc{font-size:13.5px;font-weight:300;line-height:1.72;color:var(--muted);}
+.tch-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:8px;}
+.tch-tags span{font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--amber2);border:1px solid var(--border);padding:5px 10px;}
+/* lightbox */
+#tlb{position:fixed;inset:0;z-index:5000;background:rgba(8,8,8,.96);backdrop-filter:blur(8px);display:none;flex-direction:column;}
+#tlb.on{display:flex;}
+.tlb-top{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;border-bottom:1px solid var(--border);flex:0 0 auto;}
+.tlb-cap{display:flex;flex-direction:column;gap:3px;}
+.tlb-name{font-size:14px;font-weight:800;color:var(--text);letter-spacing:-.01em;}
+.tlb-sub{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--amber2);}
+.tlb-x{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:transparent;border:1px solid var(--border);padding:10px 16px;cursor:none;transition:color .2s,border-color .2s;}
+.tlb-x:hover{color:var(--text);border-color:var(--amber2);}
+.tlb-actions{display:flex;align-items:center;gap:10px;}
+.tlb-open{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);background:var(--amber);padding:11px 16px;text-decoration:none;cursor:none;transition:background .2s;}
+.tlb-open:hover{background:var(--amber2);}
+.tlb-body{flex:1;display:flex;align-items:stretch;justify-content:center;padding:20px 56px;min-height:0;position:relative;}
+.tlb-stage{flex:1;position:relative;background:#3a3a3a;border:1px solid var(--border);min-height:0;overflow:hidden;}
+.tlb-scroll{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;align-items:center;gap:14px;padding:18px;scroll-behavior:smooth;}
+.tlb-scroll canvas{max-width:100%;width:auto;height:auto;display:block;box-shadow:0 10px 30px -12px rgba(0,0,0,.6);background:#fff;}
+#tlb-frame{width:100%;height:100%;border:none;display:block;background:#525659;}
+.tlb-loader{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:var(--surface);z-index:1;}
+.tlb-spin{width:34px;height:34px;border:3px solid var(--border);border-top-color:var(--amber);border-radius:50%;animation:spin 0.8s linear infinite;}
+.tlb-loadtxt{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);}
+@keyframes spin{to{transform:rotate(360deg);}}
+.tlb-arr{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--text);background:rgba(28,28,28,.8);border:1px solid var(--border);cursor:none;transition:background .2s,border-color .2s;z-index:3;}
+.tlb-arr:hover{background:var(--amber);color:var(--ink);border-color:var(--amber);}
+#tlb-prev{left:12px;}#tlb-next{right:12px;}
+.tlb-foot{flex:0 0 auto;padding:16px 28px 22px;border-top:1px solid var(--border);}
+.tlb-desc{font-size:13.5px;font-weight:300;line-height:1.72;color:var(--muted);max-width:760px;margin:0 auto;text-align:center;}
+
+/* UTILS-2 */
 @keyframes pulse{0%,100%{opacity:.28;}50%{opacity:1;}}
 @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* ── LIGHT MODE ── */
+body.light{
+  --ink:#F4F1EA; --surface:#EBE6DD; --card:#E4DED3; --border:rgba(30,26,20,.15);
+  --text:#1C1A16; --muted:rgba(30,26,20,.62); --dim:rgba(30,26,20,.4);
+}
+body.light #nav.on{background:rgba(244,241,234,.92);}
+body.light #tabs{background:rgba(244,241,234,.95);}
+body.light .site-ft,body.light .con-foot{background:#E7E1D6;}
+body.light .ab-bio p,body.light .ab-now{color:rgba(30,26,20,.62);}
+body.light .cred-txt{color:rgba(30,26,20,.72);}
+body.light .tl-org{color:rgba(30,26,20,.5);}
+body.light .edu-note{color:rgba(30,26,20,.45);}
+body.light .rec-q{color:rgba(30,26,20,.6);}
+body.light .edu-n{color:rgba(0,0,0,.045);}
+body.light .pl-contrib-tags span{background:rgba(0,0,0,.045);}
+body.light .v-name,body.light .v-desc,body.light .v-btn-s{color:#F4F1EA;}
+body.light .sp-over span{color:#F4F1EA;border-color:rgba(244,241,234,.5);}
+body.light .spread-num{color:rgba(244,241,234,.55);}
+body.light .tch-idx{color:#F4F1EA;}
+/* theme toggle button */
+#theme-tog{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border:1px solid var(--border);background:transparent;color:var(--text);cursor:none;transition:border-color .2s,color .2s;}
+#theme-tog:hover{border-color:var(--amber);color:var(--amber2);}
+#theme-tog svg{width:15px;height:15px;}
+#theme-tog .ic-moon{display:none;}
+body.light #theme-tog .ic-sun{display:none;}
+body.light #theme-tog .ic-moon{display:block;}
 
 @media(max-width:860px){
   .ab-grid,.aw-g,.rec-g,.edu-g,.sk-g,.res-g,.cert-g{grid-template-columns:1fr;}
@@ -418,7 +524,7 @@ body.hov #cur-r{width:46px;height:46px;border-color:var(--amber);}
 /* Restore the native cursor on touch devices; hide the custom dot */
 @media(hover:none) and (pointer:coarse){
   *,*::before,*::after{cursor:auto!important;}
-  a,button,.tb,.spread,.slb-arr,.pl-preview,.pl-link,.exp-item,.co-l,.con-btn,.cv-cta,.v-btn{cursor:pointer!important;}
+  a,button,.tb,.spread,.slb-arr,.pl-preview,.pl-link,.exp-item,.co-l,.con-btn,.cv-cta,.v-btn,.tch-card,.tch-chip,.tlb-arr,.tlb-x,.tlb-open{cursor:pointer!important;}
   #cur,#cur-r{display:none!important;}
 }
 
@@ -500,6 +606,15 @@ body.hov #cur-r{width:46px;height:46px;border-color:var(--amber);}
   .exp-grid{padding:0 16px 52px;}
   .exp-item{padding:26px 20px;}
 
+  /* TEACHING */
+  .tch-head{padding:40px 20px 30px;}
+  .coh{padding:0 16px;}
+  .coh-course{margin-left:0;flex-basis:100%;}
+  .tch-grid{grid-template-columns:1fr;}
+  .tlb-top,.tlb-foot{padding-left:18px;padding-right:18px;}
+  .tlb-arr{width:38px;height:38px;font-size:17px;}
+  #tlb-prev{left:6px;}#tlb-next{right:6px;}
+
   /* EDIT BAR */
   #edit-bar{bottom:16px;right:16px;}
   #edit-btn,#dl-btn{padding:10px 16px;font-size:10px;}
@@ -507,6 +622,7 @@ body.hov #cur-r{width:46px;height:46px;border-color:var(--amber);}
 </style>
 </head>
 <body>
+<script>(function(){try{if(localStorage.getItem('am-theme')==='light')document.body.classList.add('light');}catch(e){}})();</script>
 <div id="cur"></div>
 <div id="cur-r"></div>
 <div id="prog"></div>
@@ -516,19 +632,21 @@ body.hov #cur-r{width:46px;height:46px;border-color:var(--amber);}
   <a class="n-logo" href="#" onclick="goHome();return false;">AM</a>
   <div class="n-right">
     <span class="n-info">Klai Juba Wald · UNLV Instructor</span>
+    <button id="theme-tog" onclick="toggleTheme()" aria-label="Toggle light and dark mode" title="Toggle theme"><svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg></button>
     <a class="n-cta" href="#" onclick="switchTab('connect');return false;">Get in Touch</a>
   </div>
 </nav>
 
-<!-- TABS — 7, text only -->
+<!-- Section tabs -->
 <div id="tabs">
   <button class="tb active" onclick="switchTab('home')" data-tab="home"><span>Home</span></button>
   <button class="tb" onclick="switchTab('cv')" data-tab="cv"><span>CV</span></button>
   <button class="tb" onclick="switchTab('projects')" data-tab="projects"><span>Project List</span></button>
+  <button class="tb" onclick="switchTab('teaching')" data-tab="teaching"><span>Teaching</span></button>
   <button class="tb" onclick="switchTab('portfolio')" data-tab="portfolio"><span>Portfolio</span></button>
+  <button class="tb" onclick="switchTab('experimental')" data-tab="experimental"><span>Experimental</span></button>
   <button class="tb" onclick="switchTab('certs')" data-tab="certs"><span>Awards &amp; Certs</span></button>
   <button class="tb" onclick="switchTab('rec')" data-tab="rec"><span>Recommenders</span></button>
-  <button class="tb" onclick="switchTab('experimental')" data-tab="experimental"><span>Experimental</span></button>
 </div>
 
 <!-- ════ HOME ════ -->
@@ -539,7 +657,7 @@ body.hov #cur-r{width:46px;height:46px;border-color:var(--amber);}
     <div class="v-body">
       <p class="v-eye">Architect · Researcher · Educator · Las Vegas, NV</p>
       <h1 class="v-name">Arsalan<br/><em>Mirsadraei</em></h1>
-      <p class="v-desc">Architecture at the intersection of narrative and delivery — from concept through construction documents on landmark hospitality projects.</p>
+      <p class="v-desc">I help turn landmark hospitality projects into real buildings — staying with them from the first concept sketch all the way through the construction drawings that get them built.</p>
       <div class="v-acts">
         <a class="v-btn v-btn-p" href="#" onclick="goToAbout();return false;">About Me ↓</a>
         <a class="v-btn v-btn-s" href="#" onclick="switchTab('portfolio');return false;">View Portfolio</a>
@@ -557,8 +675,9 @@ body.hov #cur-r{width:46px;height:46px;border-color:var(--amber);}
     <div class="ab-grid">
       <div class="ab-bio">
         <p>I am an architect and educator based in Las Vegas — currently at Klai Juba Wald Architects + Interiors, contributing to landmark hospitality projects including the Guitar Tower at Hard Rock Las Vegas, LVCC Phase III, Hard Rock Athens, and Hard Rock San Juan.</p>
-        <p>My practice bridges two disciplines: precision delivery of construction documents on billion-dollar projects, and the intellectual rigor of research-led design. I hold dual M.Arch degrees in Hospitality &amp; Entertainment Design (UNLV) and Digital Architecture Technology (Pars University, Tehran).</p>
+        <p>I work two sides of the same craft: the precise, often invisible detailing that gets big, complicated buildings out of the ground, and the slower research that keeps asking why we build the way we do. I hold dual M.Arch degrees in Hospitality &amp; Entertainment Design (UNLV) and Digital Architecture Technology (Pars University, Tehran).</p>
         <p>As Instructor at UNLV's College of Architecture, Planning, and Public Affairs, I teach architectural design studios while actively pursuing ARE licensure.</p>
+        <p class="ab-now"><span class="ab-now-dot"></span><span>Right now — on the boards for the <b>Guitar Tower</b> at Hard Rock Las Vegas, and teaching second-year studio at <b>UNLV</b>.</span></p>
         <div class="creds">
           <div class="cred"><div class="cred-txt"><strong>ARCC King Student Medal · 2023</strong>National recognition for innovation and scholarship in architectural research.</div></div>
           <div class="cred"><div class="cred-txt"><strong>AIA Las Vegas Scholarship · 2023</strong>For the 2023–2024 academic year at UNLV.</div></div>
@@ -569,7 +688,7 @@ body.hov #cur-r{width:46px;height:46px;border-color:var(--amber);}
       <div>
         <div class="stats">
           <div class="st-box"><div class="st-n">8<span style="font-size:22px">yr</span></div><div class="st-l">Iran Practice</div><div style="font-size:10px;color:#9B968C;margin-top:3px;">2014 – 2022</div></div>
-          <div class="st-box"><div class="st-n">3<span style="font-size:22px">yr</span></div><div class="st-l">US Practice</div><div style="font-size:10px;color:#9B968C;margin-top:3px;">2022 – Present</div></div>
+          <div class="st-box"><div class="st-n">4<span style="font-size:22px">yr</span></div><div class="st-l">US Practice</div><div style="font-size:10px;color:#9B968C;margin-top:3px;">2022 – Present</div></div>
           <div class="st-box"><div class="st-n">2+</div><div class="st-l">M.Arch Degrees</div></div>
           <div class="st-box"><div class="st-n">3</div><div class="st-l">Publications</div></div>
           <div class="st-box st-span"><div class="st-n">4</div><div class="st-l">Awards &amp; Scholarships</div></div>
@@ -602,7 +721,7 @@ body.hov #cur-r{width:46px;height:46px;border-color:var(--amber);}
     </div>
   </div>
 
-  <div class="cs lt">
+  <div class="cs dk">
     <p class="cs-eye">Academic Background</p>
     <h2 class="cs-title">Education.</h2>
     <div class="edu-g">
@@ -640,13 +759,13 @@ body.hov #cur-r{width:46px;height:46px;border-color:var(--amber);}
         <div class="sk"><div class="sk-name">Rhinoceros<span>Advanced</span></div><div class="sk-bar"><div class="sk-fill" style="--w:75%"></div></div></div>
         <div class="sk"><div class="sk-name">Grasshopper<span>Proficient</span></div><div class="sk-bar"><div class="sk-fill" style="--w:60%"></div></div></div>
         <div class="sk"><div class="sk-name">Pathfinder<span>Proficient</span></div><div class="sk-bar"><div class="sk-fill" style="--w:58%"></div></div></div>
-        <div class="sk"><div class="sk-name">3Ds Max<span>Intermediate</span></div><div class="sk-bar"><div class="sk-fill" style="--w:40%"></div></div></div>
+        <div class="sk"><div class="sk-name">3ds Max<span>Intermediate</span></div><div class="sk-bar"><div class="sk-fill" style="--w:40%"></div></div></div>
       </div>
       <div class="sg" style="transition-delay:.16s"><div class="sg-lbl">Visualization</div>
         <div class="sk"><div class="sk-name">Twinmotion<span>Advanced</span></div><div class="sk-bar"><div class="sk-fill" style="--w:75%"></div></div></div>
         <div class="sk"><div class="sk-name">V-Ray<span>Proficient</span></div><div class="sk-bar"><div class="sk-fill" style="--w:58%"></div></div></div>
         <div class="sk"><div class="sk-name">Lumion<span>Proficient</span></div><div class="sk-bar"><div class="sk-fill" style="--w:58%"></div></div></div>
-        <div class="sk"><div class="sk-name">Keyshot<span>Intermediate</span></div><div class="sk-bar"><div class="sk-fill" style="--w:40%"></div></div></div>
+        <div class="sk"><div class="sk-name">KeyShot<span>Intermediate</span></div><div class="sk-bar"><div class="sk-fill" style="--w:40%"></div></div></div>
       </div>
       <div class="sg" style="transition-delay:.24s"><div class="sg-lbl">Adobe + Media</div>
         <div class="sk"><div class="sk-name">Photoshop<span>Advanced</span></div><div class="sk-bar"><div class="sk-fill" style="--w:75%"></div></div></div>
@@ -712,12 +831,12 @@ body.hov #cur-r{width:46px;height:46px;border-color:var(--amber);}
   <div class="port-head">
     <p class="eye">Architecture 2015–2025</p>
     <h2>Selected <em>Works.</em></h2>
-    <p>Portfolio shown as spreads — 8 academic + competition projects, pages 9–57. Click any spread to view full-screen.</p>
+    <p>Eight academic and competition projects, laid out the way the original portfolio reads — page by page, as spreads. Click any spread to open it full-screen.</p>
   </div>
   <div id="portfolio-container"></div>
 
   <div class="nextbar">
-    <a class="co-l" href="#" onclick="switchTab('certs');return false;">Awards &amp; Certs →</a>
+    <a class="co-l" href="#" onclick="switchTab('experimental');return false;">Experimental →</a>
   </div>
 </div>
 
@@ -742,7 +861,7 @@ body.hov #cur-r{width:46px;height:46px;border-color:var(--amber);}
   <div class="pl-head">
     <p class="eye">Klai Juba Wald Architects + Interiors · 2023 – Present</p>
     <h2>Professional <em>Project List.</em></h2>
-    <p>Projects I have contributed to in a professional capacity — from Schematic Design through Construction Documents — across hospitality, convention, and resort typologies.</p>
+    <p>Built work I've contributed to at Klai Juba Wald — from schematic design through construction documents, across hospitality, convention, and resort projects.</p>
   </div>
 
   <!-- Project 01 -->
@@ -871,7 +990,7 @@ body.hov #cur-r{width:46px;height:46px;border-color:var(--amber);}
     </div>
   </div>
   <div class="nextbar">
-    <a class="co-l" href="#" onclick="switchTab('portfolio');return false;">Portfolio →</a>
+    <a class="co-l" href="#" onclick="switchTab('teaching');return false;">Teaching →</a>
   </div>
 </div>
 
@@ -900,7 +1019,7 @@ body.hov #cur-r{width:46px;height:46px;border-color:var(--amber);}
   </div>
   <div class="cert-g">
     <div class="cert w"><div class="cert-yr">2016 — Tehran</div><div class="cert-org">3rd Conference on High Rise Building · Milad Tower</div><div class="cert-name">Conference Presentation Certificate</div><div class="cert-desc">Certificate of acceptance, presentation, and attendance for "Solutions for Evacuation in Commercial High-Rise Buildings" at the 3rd Conference on High Rise Building, Milad Tower International Conference Center. Supported by UN-Habitat.</div><div class="cert-ico">🏙️</div></div>
-    <div class="cert s"><div class="cert-yr">2024</div><div class="cert-org">si_architecture + urban design / UNLV SoA</div><div class="cert-name">Contribution Letter — Library Competition</div><div class="cert-desc">Letter from Dr. Steffen Lehmann recognizing contributions to "A House for Books, Music, and Nature" — international competition, Rzeszów, Poland, Spring 2024.</div><div class="cert-ico">📜</div></div>
+    <div class="cert s"><div class="cert-yr">2024</div><div class="cert-org">si_architecture + urban design / UNLV SoA</div><div class="cert-name">Contribution Letter — Library Competition</div><div class="cert-desc">Letter from Dr. Steffen Lehmann recognizing contributions to "A House for Books, Music and Trees" — international competition, Rzeszów, Poland, Spring 2024.</div><div class="cert-ico">📜</div></div>
     <div class="cert w"><div class="cert-yr">Ongoing</div><div class="cert-org">NCARB</div><div class="cert-name">Architect Registration Examination (ARE)</div><div class="cert-desc">Actively pursuing full licensure. Professional experience at Klai Juba Wald and academic preparation at UNLV align with all examination content areas.</div><div class="cert-ico">📐</div></div>
   </div>
 
@@ -918,18 +1037,18 @@ body.hov #cur-r{width:46px;height:46px;border-color:var(--amber);}
   <div class="rec-head">
     <p class="eye">Professional Network</p>
     <h2>Recommenders &amp;<br/><em>References.</em></h2>
-    <p>Professionals who have worked with me directly across practice, academia, and research — available to speak to my qualifications and character.</p>
+    <p>People I've worked with directly — in practice, in the studio, and on research — who can speak to how I work and who I am.</p>
   </div>
   <div style="padding:2px;">
     <div class="rec-g">
-      <div class="rec"><div class="rec-av">GN</div><div class="rec-n">Glenn Nowak</div><div class="rec-r">Thesis Advisor + Graduate Coordinator</div><div class="rec-o">University of Nevada, Las Vegas · School of Architecture</div><div class="rec-links"><a href="/cdn-cgi/l/email-protection#96f1faf3f8f8b8f8f9e1f7fdd6e3f8fae0b8f3f2e3"><span class="__cf_email__" data-cfemail="27404b42494909494850464c6752494b5109424352">[email&#160;protected]</span></a></div><div class="rec-q">"Collaborated on the WFCHRIE peer-reviewed paper on robot-supported QSR interiors. Co-supervised the Library + Concert Hall competition thesis project."</div></div>
+      <div class="rec"><div class="rec-av">GN</div><div class="rec-n">Glenn Nowak</div><div class="rec-r">Thesis Advisor + Graduate Coordinator</div><div class="rec-o">University of Nevada, Las Vegas · School of Architecture</div><div class="rec-links"><a href="/cdn-cgi/l/email-protection#8aede6efe4e4a4e4e5fdebe1caffe4e6fca4efeeff"><span class="__cf_email__" data-cfemail="47202b22292969292830262c0732292b3169222332">[email&#160;protected]</span></a></div><div class="rec-q">"Collaborated on the WFCHRIE peer-reviewed paper on robot-supported QSR interiors. Co-supervised the Library + Concert Hall competition thesis project."</div></div>
       <div class="rec"><div class="rec-av">WH</div><div class="rec-n">William Hallisky</div><div class="rec-r">Design Director</div><div class="rec-o">Steelman Partners · Las Vegas, NV</div><div class="rec-links"><a href="tel:2134483446">213-448-3446</a></div><div class="rec-q">"Supervised internship work on entertainment architecture projects across Steelman's global casino-resort portfolio during Summer 2023."</div></div>
       <div class="rec"><div class="rec-av">PR</div><div class="rec-n">Phil Rocha</div><div class="rec-r">Project Manager</div><div class="rec-o">Steelman Partners · Las Vegas, NV</div><div class="rec-links"><a href="tel:3057483635">305-748-3635</a></div><div class="rec-q">"Oversaw project documentation and coordination tasks during internship at Steelman Partners in Summer 2023."</div></div>
-      <div class="rec"><div class="rec-av">DO</div><div class="rec-n">Daniel Ortega</div><div class="rec-r">Director</div><div class="rec-o">University of Nevada, Las Vegas · School of Architecture</div><div class="rec-links"><a href="/cdn-cgi/l/email-protection#b4d0d5daddd1d89adbc6c0d1d3d5f4c1dad8c29ad1d0c1"><span class="__cf_email__" data-cfemail="c6a2a7a8afa3aae8a9b4b2a3a1a786b3a8aab0e8a3a2b3">[email&#160;protected]</span></a></div><div class="rec-q">"Program director familiar with Arsalan's academic performance, research achievements, and professional development throughout the M.Arch program."</div></div>
+      <div class="rec"><div class="rec-av">DO</div><div class="rec-n">Daniel Ortega</div><div class="rec-r">Director</div><div class="rec-o">University of Nevada, Las Vegas · School of Architecture</div><div class="rec-links"><a href="/cdn-cgi/l/email-protection#284c4946414d4406475a5c4d4f49685d46445e064d4c5d"><span class="__cf_email__" data-cfemail="1a7e7b74737f763475686e7f7d7b5a6f74766c347f7e6f">[email&#160;protected]</span></a></div><div class="rec-q">"Program director familiar with Arsalan's academic performance, research achievements, and professional development throughout the M.Arch program."</div></div>
     </div>
   </div>
   <div class="nextbar">
-    <a class="co-l" href="#" onclick="switchTab('experimental');return false;">Experimental →</a>
+    <a class="co-l" href="#" onclick="switchTab('home');return false;">Back to Home →</a>
   </div>
 </div>
 
@@ -958,7 +1077,7 @@ body.hov #cur-r{width:46px;height:46px;border-color:var(--amber);}
   <div class="exp-head">
     <p class="eye">Motion + Architecture</p>
     <h2>Experimental<br/><em>Work.</em></h2>
-    <p>A collection of architectural films and video experiments — exploring space, movement, and narrative through the lens.</p>
+    <p>Where I step away from the drawing set. Short films and motion studies about how a building moves, catches light, and tells its story.</p>
   </div>
   <div class="exp-grid">
     <div class="exp-item">
@@ -978,8 +1097,132 @@ body.hov #cur-r{width:46px;height:46px;border-color:var(--amber);}
     </div>
   </div>
   <div class="nextbar">
-    <a class="co-l" href="#" onclick="switchTab('home');return false;">Back to Home →</a>
+    <a class="co-l" href="#" onclick="switchTab('certs');return false;">Awards &amp; Certs →</a>
   </div>
+</div>
+
+<!-- ════ TEACHING ════ -->
+<div id="panel-teaching" class="panel">
+  <div class="tch-head">
+    <p class="eye">Teaching · UNLV School of Architecture</p>
+    <h2>Inside the <em>studio.</em></h2>
+    <p>Alongside practice, I teach and mentor design students at UNLV's School of Architecture — guiding projects from first concept through final review. For most of these students this is their first second-year studio, and the first building they've ever designed start to finish: a window into how the next generation learns to reason through site, structure, and story.</p>
+    <div class="tch-filter">
+      <button class="tch-chip on" data-filter="all" onclick="filterCohort('all')">All Work</button>
+      <button class="tch-chip" data-filter="280" onclick="filterCohort('280')">Fall 2025 · 280</button>
+      <button class="tch-chip" data-filter="282" onclick="filterCohort('282')">Spring 2026 · 282</button>
+    </div>
+  </div>
+
+  <!-- COHORT 1 -->
+  <div class="coh" data-cohort="280">
+    <div class="coh-bar">
+      <span class="coh-logo"><img src="assets/teaching/unlv-soa.png" alt="UNLV School of Architecture"/></span>
+      <span class="coh-term">Fall 2025</span>
+      <span class="coh-title">Design Foundation II</span>
+      <span class="coh-course">UNLV | AAE 280 · PROJECT 05</span>
+    </div>
+    <div class="coh-note"><p>I mentored this studio through its <b>final design response</b> — the capstone of the semester. Students took a site they'd analyzed earlier in the term and resolved it into a complete hospitality retreat: a cluster of <b>cabins, a café, and an event space</b>. The brief pushed them to settle site layout and building placement, resolve roof forms and exterior materials, develop repeatable moves for recurring conditions, and keep all circulation ADA-compliant — produced entirely by hand, in drawings and a monochromatic study model, with no 3D software.</p></div>
+    <div class="tch-grid">
+      <article class="tch-card" onclick="openTlb(0)">
+        <div class="tch-media"><span class="tch-idx">01</span><span class="tch-zoom">Full Set ↗</span><img src="assets/teaching/erys-whitmore_misty-grove.jpg" alt="Misty Grove — monochromatic site model by Erys Whitmore"/></div>
+        <div class="tch-body">
+          <p class="tch-meta">Final Design Response</p>
+          <h4 class="tch-title">Misty Grove</h4>
+          <p class="tch-by">Erys Whitmore</p>
+          <p class="tch-desc">Erys set her event-and-stay retreat on Vashon Island, Washington, and let biophilic design drive every move — six cabins gathered around a café, a productive public garden, and a wellness-focused event center, all held back from a protected wildlife corridor. Her monochromatic study model, staged in dried botanicals, carries that nature-first concept right through the presentation.</p>
+          <div class="tch-tags"><span>Biophilic Design</span><span>Hand Model</span></div>
+        </div>
+      </article>
+      <article class="tch-card" onclick="openTlb(1)">
+        <div class="tch-media board"><span class="tch-idx">02</span><span class="tch-zoom">Full Set ↗</span><img src="assets/teaching/dann-ramos_the-yucca.jpg" alt="The Yucca — presentation board by Dann Carlo Ramos"/></div>
+        <div class="tch-body">
+          <p class="tch-meta">Final Design Response</p>
+          <h4 class="tch-title">The Yucca</h4>
+          <p class="tch-by">Dann Carlo Ramos</p>
+          <p class="tch-desc">Dann's arts-and-culture center in Albuquerque is organized as a climate-responsive landscape, its form borrowed from the yucca — "as it goes up, it goes outward." Earth-sheltered volumes, a rattan shading canopy, and terracotta thermal-mass walls wrap a semi-sunken amphitheater, balancing passive cooling with community gathering.</p>
+          <div class="tch-tags"><span>Cultural</span><span>Climate-Responsive</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <!-- COHORT 2 -->
+  <div class="coh" data-cohort="282">
+    <div class="coh-bar">
+      <span class="coh-logo"><img src="assets/teaching/unlv-soa.png" alt="UNLV School of Architecture"/></span>
+      <span class="coh-term">Spring 2026</span>
+      <span class="coh-title">Design Foundation III</span>
+      <span class="coh-course">UNLV | AAE 282 · PROJECT 04</span>
+    </div>
+    <div class="coh-note"><p>This studio worked from a shared group master plan — <b>"Fledgling Future"</b> — for the <b>Wildlife Center of the North Coast</b>, a real wildlife-rehabilitation center on the Pacific Northwest coast. I guided each student as they took a single piece of that plan and developed it into a complete individual project, this time pairing hand drawing with digital rendering and thinking in modular, prefabricable terms suited to a remote site.</p></div>
+    <div class="tch-grid">
+      <article class="tch-card" onclick="openTlb(2)">
+        <div class="tch-media"><span class="tch-idx">01</span><span class="tch-zoom">Full Set ↗</span><img src="assets/teaching/victoria-jungic_hand-grown-sanctuary.jpg" alt="Hand-Grown Sanctuary bird blind — watercolor by Victoria Jungic"/></div>
+        <div class="tch-body">
+          <p class="tch-meta">Individual Project</p>
+          <h4 class="tch-title">Hand-Grown Sanctuary</h4>
+          <p class="tch-by">Victoria Jungic</p>
+          <p class="tch-desc">Victoria framed the whole center around a single idea — a sanctuary that is "cultivated, not constructed," growing and healing like the animals it shelters. From a full site-zoning study she developed a family of bird blinds — central, children's, riverside, and stream — with one-way viewing film, integrated perches, and guano collection, worked out in watercolor elevations and cardboard study models.</p>
+          <div class="tch-tags"><span>Wildlife</span><span>Watercolor</span></div>
+        </div>
+      </article>
+      <article class="tch-card" onclick="openTlb(3)">
+        <div class="tch-media"><span class="tch-idx">02</span><span class="tch-zoom">Full Set ↗</span><img src="assets/teaching/jacob-miranda_flowform.jpg" alt="Flowform kinetic workshop — render by Jacob Miranda"/></div>
+        <div class="tch-body">
+          <p class="tch-meta">Individual Project</p>
+          <h4 class="tch-title">Flowform</h4>
+          <p class="tch-by">Jacob Miranda</p>
+          <p class="tch-desc">Jacob's kinetic education workshop runs on its own water wheel — water turns the wheel, the shaft drives a generator, and wiring carries power onto the site. A kinetic aluminum façade reads as "birds in flight," Shou Sugi Ban charred-cedar walls push the building's lifespan past fifty years, and bird-safe glazing protects the wildlife it teaches about. The most render-forward project in the studio, paired with a glowing study model.</p>
+          <div class="tch-tags"><span>Kinetic Façade</span><span>Rendering</span></div>
+        </div>
+      </article>
+      <article class="tch-card" onclick="openTlb(4)">
+        <div class="tch-media board"><span class="tch-idx">03</span><span class="tch-zoom">Full Set ↗</span><img src="assets/teaching/evan-phillips_signage.jpg" alt="Signage Improvements — entry gateway elevation by Evan Phillips"/></div>
+        <div class="tch-body">
+          <p class="tch-meta">Individual Project</p>
+          <h4 class="tch-title">Signage Improvements</h4>
+          <p class="tch-by">Evan Phillips</p>
+          <p class="tch-desc">Evan saw the center's mismatched signage as an opportunity and built a modular system to fix it — inspired by "Cormie," WCNC's ambassador cormorant. A timber-and-aluminum entry gateway, info panels, wayfinding posts, and a new ambassador-animal series are all worked out to section cuts, exploded axons, materials, and a per-sign budget, then composited back onto real site photos.</p>
+          <div class="tch-tags"><span>Wayfinding</span><span>Signage System</span></div>
+        </div>
+      </article>
+      <article class="tch-card" onclick="openTlb(5)">
+        <div class="tch-media"><span class="tch-idx">04</span><span class="tch-zoom">Full Set ↗</span><img src="assets/teaching/esmeralda-gonzalez_trails.jpg" alt="Fledgling Future Trails — outdoor convo-pit by Esmeralda Gonzalez"/></div>
+        <div class="tch-body">
+          <p class="tch-meta">Individual Project</p>
+          <h4 class="tch-title">Fledgling Future: Trails</h4>
+          <p class="tch-by">Esmeralda Gonzalez</p>
+          <p class="tch-desc">Esmeralda designed the master plan's connective tissue — a trail network stitched together with seating, restrooms, and gathering spaces. Reading how social seabirds flock, she shaped places for people to do the same: a sculptural, kidney-plan event space in rough-cut stone, steel, and tinted concrete, and an outdoor "convo-pit," a sunken circular conversation seat in timber and concrete, all carried in watercolor.</p>
+          <div class="tch-tags"><span>Landscape</span><span>Trails</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <div class="nextbar">
+    <a class="co-l" href="#" onclick="switchTab('portfolio');return false;">Portfolio →</a>
+  </div>
+</div>
+
+<!-- TEACHING LIGHTBOX -->
+<div id="tlb">
+  <div class="tlb-top">
+    <div class="tlb-cap"><span class="tlb-name" id="tlb-name"></span><span class="tlb-sub" id="tlb-sub"></span></div>
+    <div class="tlb-actions">
+      <a class="tlb-open" id="tlb-open" href="#" target="_blank" rel="noopener">Open PDF ↗</a>
+      <button class="tlb-x" onclick="closeTlb()">Close ✕</button>
+    </div>
+  </div>
+  <div class="tlb-body">
+    <button class="tlb-arr" id="tlb-prev" onclick="stepTlb(-1)">‹</button>
+    <div class="tlb-stage">
+      <div class="tlb-scroll" id="tlb-scroll"></div>
+      <div class="tlb-loader" id="tlb-loader"><span class="tlb-spin"></span><span class="tlb-loadtxt" id="tlb-loadtxt">Loading full project set…</span></div>
+    </div>
+    <button class="tlb-arr" id="tlb-next" onclick="stepTlb(1)">›</button>
+  </div>
+  <div class="tlb-foot"><p class="tlb-desc" id="tlb-desc"></p></div>
 </div>
 
 <script>
@@ -988,7 +1231,7 @@ const cur=document.getElementById('cur'),curR=document.getElementById('cur-r');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
 (function t(){cur.style.left=mx+'px';cur.style.top=my+'px';rx+=(mx-rx)*.11;ry+=(my-ry)*.11;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(t);})();
-document.querySelectorAll('a,button,.spread,.slb-arr,.pw-card,.pl-preview,.pl-link,.pl-ph,.exp-item,.tb').forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));});
+document.querySelectorAll('a,button,.spread,.slb-arr,.pw-card,.pl-preview,.pl-link,.pl-ph,.exp-item,.tb,.tch-card,.tch-chip,.tlb-arr,.tlb-x,.tlb-open').forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));});
 
 /* ── PROGRESS ── */
 const prog=document.getElementById('prog');
@@ -1015,6 +1258,81 @@ function switchTab(id){
   if((id==='portfolio'||id==='projects')&&!spreadsBuilt)buildSpreads();
 }
 window.switchTab=switchTab;
+function toggleTheme(){var light=document.body.classList.toggle('light');try{localStorage.setItem('am-theme',light?'light':'dark');}catch(e){}}
+window.toggleTheme=toggleTheme;
+
+/* ── TEACHING: filter + lightbox ── */
+const TCH=[
+  {n:'Misty Grove',s:'Erys Whitmore · AAE 280',img:'assets/teaching/erys-whitmore_misty-grove.jpg',pdf:'assets/teaching/pdf/erys-whitmore_misty-grove.pdf',d:'Erys set her event-and-stay retreat on Vashon Island, Washington, and let biophilic design drive every move — six cabins around a café, a productive public garden, and a wellness event center, all held back from a protected wildlife corridor. Built entirely by hand as a monochromatic study model staged in dried botanicals.'},
+  {n:'The Yucca',s:'Dann Carlo Ramos · AAE 280',img:'assets/teaching/dann-ramos_the-yucca.jpg',pdf:'assets/teaching/pdf/dann-ramos_the-yucca.pdf',d:'An arts-and-culture center in Albuquerque organized as a climate-responsive landscape, its form borrowed from the yucca — “as it goes up, it goes outward.” Earth-sheltered volumes, a rattan shading canopy, and terracotta thermal-mass walls wrap a semi-sunken amphitheater.'},
+  {n:'Hand-Grown Sanctuary',s:'Victoria Jungic · AAE 282',img:'assets/teaching/victoria-jungic_hand-grown-sanctuary.jpg',pdf:'assets/teaching/pdf/victoria-jungic_hand-grown-sanctuary.pdf',d:'A sanctuary that is “cultivated, not constructed.” From a full site-zoning study, Victoria developed a family of bird blinds — central, children’s, riverside, and stream — with one-way viewing film, integrated perches, and guano collection, drawn in watercolor with cardboard study models.'},
+  {n:'Flowform',s:'Jacob Miranda · AAE 282',img:'assets/teaching/jacob-miranda_flowform.jpg',pdf:'assets/teaching/pdf/jacob-miranda_flowform.pdf',d:'A kinetic education workshop powered by its own water wheel. A kinetic aluminum façade reads as “birds in flight,” Shou Sugi Ban charred-cedar walls extend the building’s lifespan past fifty years, and bird-safe glazing protects the wildlife it teaches about — the most render-forward project in the studio.'},
+  {n:'Signage Improvements',s:'Evan Phillips · AAE 282',img:'assets/teaching/evan-phillips_signage.jpg',pdf:'assets/teaching/pdf/evan-phillips_signage.pdf',d:'A modular signage system inspired by “Cormie,” WCNC’s ambassador cormorant. A timber-and-aluminum entry gateway, info panels, wayfinding posts, and an ambassador-animal series — all worked out to section cuts, exploded axons, materials, and a per-sign budget, then composited onto real site photos.'},
+  {n:'Fledgling Future: Trails',s:'Esmeralda Gonzalez · AAE 282',img:'assets/teaching/esmeralda-gonzalez_trails.jpg',pdf:'assets/teaching/pdf/esmeralda-gonzalez_trails.pdf',d:'The master plan’s connective tissue — a trail network stitched together with seating, restrooms, and gathering spaces. Reading how social seabirds flock, Esmeralda shaped a kidney-plan event space in rough-cut stone, steel, and tinted concrete, and a sunken outdoor “convo-pit,” all carried in watercolor.'}
+];
+let tIdx=0;
+function filterCohort(f){
+  document.querySelectorAll('.tch-chip').forEach(c=>c.classList.toggle('on',c.dataset.filter===f));
+  document.querySelectorAll('#panel-teaching .coh').forEach(c=>c.classList.toggle('hide',f!=='all'&&c.dataset.cohort!==f));
+}
+function openTlb(i){
+  tIdx=i;renderTlb();
+  document.getElementById('tlb').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+function closeTlb(){document.getElementById('tlb').classList.remove('on');document.body.style.overflow='';tToken++;document.getElementById('tlb-scroll').innerHTML='';}
+function stepTlb(d){tIdx=(tIdx+d+TCH.length)%TCH.length;renderTlb();}
+let tToken=0;
+if(window.pdfjsLib)pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+async function renderTlb(){
+  const t=TCH[tIdx];
+  document.getElementById('tlb-open').href=t.pdf;
+  document.getElementById('tlb-name').textContent=t.n;
+  document.getElementById('tlb-sub').textContent=t.s;
+  document.getElementById('tlb-desc').textContent=t.d;
+  const loader=document.getElementById('tlb-loader');
+  const loadtxt=document.getElementById('tlb-loadtxt');
+  const scroll=document.getElementById('tlb-scroll');
+  const token=++tToken;
+  scroll.innerHTML='';scroll.scrollTop=0;
+  loader.style.display='flex';loadtxt.textContent='Loading full project set…';
+  if(!window.pdfjsLib){loadtxt.textContent='Opening PDF…';window.open(t.pdf,'_blank');loader.style.display='none';return;}
+  try{
+    const pdf=await pdfjsLib.getDocument(t.pdf).promise;
+    if(token!==tToken)return;
+    const dpr=Math.min(window.devicePixelRatio||1,2);
+    const targetW=Math.min(scroll.clientWidth-36,1100);
+    for(let p=1;p<=pdf.numPages;p++){
+      if(token!==tToken)return;
+      loadtxt.textContent='Rendering page '+p+' of '+pdf.numPages+'…';
+      const page=await pdf.getPage(p);
+      const base=page.getViewport({scale:1});
+      const scale=(targetW/base.width)*dpr;
+      const vp=page.getViewport({scale});
+      const canvas=document.createElement('canvas');
+      canvas.width=vp.width;canvas.height=vp.height;
+      canvas.style.width=(vp.width/dpr)+'px';
+      const ctx=canvas.getContext('2d');
+      await page.render({canvasContext:ctx,viewport:vp}).promise;
+      if(token!==tToken)return;
+      scroll.appendChild(canvas);
+      if(p===1)loader.style.display='none';
+    }
+    loader.style.display='none';
+  }catch(err){
+    if(token!==tToken)return;
+    loadtxt.textContent='Couldn’t render preview — opening PDF in a new tab.';
+    setTimeout(()=>{if(token===tToken){window.open(t.pdf,'_blank');loader.style.display='none';}},900);
+  }
+}
+window.filterCohort=filterCohort;window.openTlb=openTlb;window.closeTlb=closeTlb;window.stepTlb=stepTlb;
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('tlb').classList.contains('on'))return;
+  if(e.key==='Escape')closeTlb();
+  else if(e.key==='ArrowLeft')stepTlb(-1);
+  else if(e.key==='ArrowRight')stepTlb(1);
+});
+document.getElementById('tlb').addEventListener('click',e=>{if(e.target.id==='tlb')closeTlb();});
 function goHome(){switchTab('home');document.getElementById('panel-home').scrollTop=0;}
 function goToAbout(){document.getElementById('ab-sec').scrollIntoView({behavior:'smooth'});}
 window.goHome=goHome;window.goToAbout=goToAbout;
@@ -1057,7 +1375,7 @@ const PROJECTS=[
    spreads:[[8,9],[10,11],[12,13],[14]]},
   {num:'02',name:'Legendary Highway 14 Tower',sub:'Civic Monument · De Smet, SD · Competition 2023',
    spreads:[[null,15],[16,17],[18],[19,20]]},
-  {num:'03',name:'Tili Wini Terroir Wineyard',sub:'Adaptive Reuse · Perugia, Italy · Competition 2023',
+  {num:'03',name:'Tili Wini Terroir Vineyard',sub:'Adaptive Reuse · Perugia, Italy · Competition 2023',
    spreads:[[null,21],[22,23],[24],[25,26]]},
   {num:'04',name:'Pajouhesh High Rise Building',sub:'Mixed-Use Tower · Tehran · 2019',
    spreads:[[null,27],[28,29],[30],[31,32]]},
@@ -1068,7 +1386,7 @@ const PROJECTS=[
   {num:'07',name:'Movable High-Rise Building',sub:'Kinetic Architecture · Tehran · 2016',
    spreads:[[null,45],[46],[47,48]]},
   {num:'08',name:'Roof Yard House',sub:'Residential Tower · Tehran · 2016',
-   spreads:[[null,49],[50,51],[52,53],[54,55],[null,57]]}
+   spreads:[[49,50],[51,52],[53,54],[55,57]]}
 ];
 
 let allSpreads=[];
