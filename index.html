@@ -576,6 +576,8 @@ body.light #theme-tog .ic-moon{display:block;}
   #ab-sec{padding:60px 20px;}
   .ab-title{margin-bottom:34px;}
   .ab-grid{gap:38px;}
+  .st-box{padding:22px 16px;}
+  .st-n{font-size:38px;}
 
   /* CV SECTIONS */
   .cs{padding:54px 20px;}
@@ -631,9 +633,18 @@ body.light #theme-tog .ic-moon{display:block;}
   .coh{padding:0 16px;}
   .coh-course{margin-left:0;flex-basis:100%;}
   .tch-grid{grid-template-columns:1fr;}
-  .tlb-top,.tlb-foot{padding-left:18px;padding-right:18px;}
-  .tlb-arr{width:38px;height:38px;font-size:17px;}
-  #tlb-prev{left:6px;}#tlb-next{right:6px;}
+  /* PDF lightbox — give the document room; let the top bar wrap gracefully */
+  .tlb-top{flex-wrap:wrap;gap:10px 12px;padding:12px 18px;}
+  .tlb-cap{flex:1 1 auto;min-width:0;}
+  .tlb-name{font-size:13px;}
+  .tlb-actions{flex:0 0 auto;}
+  .tlb-open,.tlb-x{padding:9px 13px;font-size:10px;}
+  .tlb-body{padding:12px 8px;}
+  .tlb-scroll{padding:10px;gap:10px;}
+  .tlb-foot{padding:14px 18px 18px;}
+  .tlb-desc{font-size:12.5px;}
+  .tlb-arr{width:36px;height:36px;font-size:16px;}
+  #tlb-prev{left:4px;}#tlb-next{right:4px;}
 
   /* EDIT BAR */
   #edit-bar{bottom:16px;right:16px;}
@@ -900,7 +911,6 @@ body.light #theme-tog .ic-moon{display:block;}
             <span>RCP &amp; Partition Plans</span>
             <span>Consultant Annotation Packages</span>
             <span>DD Milestone Submissions</span>
-            <span>Cross-Discipline Sheet Review</span>
           </div>
         </div>
       </div>
@@ -927,17 +937,17 @@ body.light #theme-tog .ic-moon{display:block;}
         <div class="pl-num">Project 02 · Construction Documents</div>
         <div class="pl-name">Hard Rock Hotel &amp; Casino Las Vegas</div>
         <div class="pl-firm">Klai Juba Wald · Las Vegas, NV</div>
-        <div class="pl-desc">Supported both the new Guitar Tower and the Mirage tower/casino renovation during Construction Documents phase. Work included detail development, sheet annotations, and cross-discipline coordination. The Guitar Tower is a landmark addition to the Las Vegas Strip, replacing the former Mirage Hotel &amp; Casino.</div>
+        <div class="pl-desc">Worked the Construction Documents for the new Guitar Tower and the remodel of the existing Mirage casino — detailing, the CD drawing set, electrical drawings, and slab plans, all with MEP coordination across disciplines. The Guitar Tower is a landmark addition to the Las Vegas Strip, replacing the former Mirage Hotel &amp; Casino.</div>
         <div class="pl-contrib">
           <div class="pl-contrib-lbl">My Contributions</div>
           <div class="pl-contrib-tags">
-            <span>Guitar Tower CDs</span>
-            <span>Mirage Renovation CDs</span>
-            <span>Exterior Envelope Details</span>
-            <span>Interior Partition Coordination</span>
-            <span>MEP &amp; Structural Cross-Check</span>
-            <span>Sheet Annotations &amp; Numbering</span>
-            <span>Specification Coordination</span>
+            <span>Construction Documents</span>
+            <span>Mirage Casino Remodel</span>
+            <span>Detailing</span>
+            <span>Electrical Drawings</span>
+            <span>Slab Plans</span>
+            <span>MEP Coordination</span>
+            <span>CD Drawing Set</span>
           </div>
         </div>
       </div>
@@ -952,19 +962,18 @@ body.light #theme-tog .ic-moon{display:block;}
   <div class="pl-item">
     <div class="pl-info">
       <div>
-        <div class="pl-num">Project 03 · SD + Design Development</div>
+        <div class="pl-num">Project 03 · Design Development</div>
         <div class="pl-name">Hard Rock Hotel &amp; Casino San Juan</div>
         <div class="pl-firm">Klai Juba Wald · San Juan, Puerto Rico</div>
-        <div class="pl-desc">Assisted during Schematic Design and Design Development phases. Primary focus areas included core &amp; shell coordination and the pool deck scope — a complex multi-level amenity deck central to the resort experience. Coordinated with structural and MEP consultants on deck framing and drainage.</div>
+        <div class="pl-desc">Took charge of the core &amp; shell during Design Development, including the mock-up suite that set the standard for the guest rooms. Produced the DD drawing sets and coordinated the scope with the consultant team.</div>
         <div class="pl-contrib">
           <div class="pl-contrib-lbl">My Contributions</div>
           <div class="pl-contrib-tags">
-            <span>Core &amp; Shell Drawings</span>
-            <span>Pool Deck Framing Coordination</span>
-            <span>MEP Deck Integration</span>
-            <span>SD Narrative Documents</span>
-            <span>DD Milestone Drawing Sets</span>
-            <span>Structural Consultant Coordination</span>
+            <span>Core &amp; Shell</span>
+            <span>Mock-Up Suite</span>
+            <span>Guest Room Standard</span>
+            <span>DD Drawing Sets</span>
+            <span>Consultant Coordination</span>
           </div>
         </div>
       </div>
@@ -987,20 +996,19 @@ body.light #theme-tog .ic-moon{display:block;}
     </div>
     <div class="pl-info">
       <div>
-        <div class="pl-num">Project 04 · SD through Construction Documents</div>
+        <div class="pl-num">Project 04 · New Build + Punch Walks</div>
         <div class="pl-name">Las Vegas Convention Center</div>
         <div class="pl-firm">Klai Juba Wald · Las Vegas, NV</div>
-        <div class="pl-desc">Worked on a new ground-up scope for the Las Vegas Convention Center — a separate new-build addition distinct from the full LVCC campus project. Supported the team through Schematic Design, Design Development, and full Construction Documents. Assisted with follow-up renovation scopes and punch walk coordination over the past year.</div>
+        <div class="pl-desc">Worked on the entitlement and the new build-up section serving the engineering and facilities spaces of the Las Vegas Convention Center, and carried out punch walks for the newly opened North and Central Halls — a ground-up new-build scope distinct from the wider LVCC campus.</div>
         <div class="pl-contrib">
           <div class="pl-contrib-lbl">My Contributions</div>
           <div class="pl-contrib-tags">
-            <span>Full SD → DD → CD Delivery</span>
-            <span>Ground-Up New-Build Scope</span>
-            <span>Sheet Set Organization</span>
-            <span>Renovation Follow-Up Scopes</span>
-            <span>Punch Walk Coordination</span>
-            <span>Field Notes &amp; RFI Support</span>
-            <span>Multi-Phase Drawing Management</span>
+            <span>Entitlement</span>
+            <span>New Build-Up Section</span>
+            <span>Engineering &amp; Facilities</span>
+            <span>Punch Walks</span>
+            <span>North Hall</span>
+            <span>Central Hall</span>
           </div>
         </div>
       </div>
@@ -1013,18 +1021,15 @@ body.light #theme-tog .ic-moon{display:block;}
   <div class="pl-item">
     <div class="pl-info">
       <div>
-        <div class="pl-num">Project 05 · Construction Administration</div>
+        <div class="pl-num">Project 05 · Façade + Drawing Sets</div>
         <div class="pl-name">Durango Casino &amp; Resort</div>
         <div class="pl-firm">JIVE Architecture · Las Vegas, NV</div>
-        <div class="pl-desc">A $750 million ground-up resort on the southwest edge of the Las Vegas valley — a 15-story tower of 211 rooms rising above an 83,178-square-foot casino floor, wrapped in a full range of dining from fine to casual. I supported the project with JIVE Architecture through Construction Administration, carrying the drawings into the field and keeping the design intent intact through to opening.</div>
+        <div class="pl-desc">A $750 million ground-up resort on the southwest edge of the Las Vegas valley — a 15-story tower of 211 rooms rising above an 83,178-square-foot casino floor. I worked on the exterior façade and helped with the drawing sets with JIVE Architecture.</div>
         <div class="pl-contrib">
           <div class="pl-contrib-lbl">My Contributions</div>
           <div class="pl-contrib-tags">
-            <span>Construction Administration</span>
-            <span>RFI &amp; Submittal Review</span>
-            <span>Field Coordination</span>
-            <span>Architect's Supplemental Instructions</span>
-            <span>Punch Walk &amp; Closeout</span>
+            <span>Exterior Façade</span>
+            <span>Drawing Set Support</span>
           </div>
         </div>
       </div>
@@ -1091,10 +1096,10 @@ body.light #theme-tog .ic-moon{display:block;}
   </div>
   <div style="padding:2px;">
     <div class="rec-g">
-      <div class="rec"><div class="rec-av">GN</div><div class="rec-n">Glenn Nowak</div><div class="rec-r">Thesis Advisor + Graduate Coordinator</div><div class="rec-o">University of Nevada, Las Vegas · School of Architecture</div><div class="rec-links"><a href="/cdn-cgi/l/email-protection#88efe4ede6e6a6e6e7ffe9e3c8fde6e4fea6edecfd"><span class="__cf_email__" data-cfemail="63040f060d0d4d0d0c14020823160d0f154d060716">[email&#160;protected]</span></a></div><div class="rec-q">"Collaborated on the WFCHRIE peer-reviewed paper on robot-supported QSR interiors. Co-supervised the Library + Concert Hall competition thesis project."</div></div>
+      <div class="rec"><div class="rec-av">GN</div><div class="rec-n">Glenn Nowak</div><div class="rec-r">Thesis Advisor + Graduate Coordinator</div><div class="rec-o">University of Nevada, Las Vegas · School of Architecture</div><div class="rec-links"><a href="/cdn-cgi/l/email-protection#a6c1cac3c8c888c8c9d1c7cde6d3c8cad088c3c2d3"><span class="__cf_email__" data-cfemail="30575c555e5e1e5e5f47515b70455e5c461e555445">[email&#160;protected]</span></a></div><div class="rec-q">"Collaborated on the WFCHRIE peer-reviewed paper on robot-supported QSR interiors. Co-supervised the Library + Concert Hall competition thesis project."</div></div>
       <div class="rec"><div class="rec-av">WH</div><div class="rec-n">William Hallisky</div><div class="rec-r">Design Director</div><div class="rec-o">Steelman Partners · Las Vegas, NV</div><div class="rec-links"><a href="tel:2134483446">213-448-3446</a></div><div class="rec-q">"Supervised internship work on entertainment architecture projects across Steelman's global casino-resort portfolio during Summer 2023."</div></div>
       <div class="rec"><div class="rec-av">PR</div><div class="rec-n">Phil Rocha</div><div class="rec-r">Project Manager</div><div class="rec-o">Steelman Partners · Las Vegas, NV</div><div class="rec-links"><a href="tel:3057483635">305-748-3635</a></div><div class="rec-q">"Oversaw project documentation and coordination tasks during internship at Steelman Partners in Summer 2023."</div></div>
-      <div class="rec"><div class="rec-av">DO</div><div class="rec-n">Daniel Ortega</div><div class="rec-r">Director</div><div class="rec-o">University of Nevada, Las Vegas · School of Architecture</div><div class="rec-links"><a href="/cdn-cgi/l/email-protection#e084818e89858cce8f9294858781a0958e8c96ce858495"><span class="__cf_email__" data-cfemail="b8dcd9d6d1ddd496d7caccdddfd9f8cdd6d4ce96dddccd">[email&#160;protected]</span></a></div><div class="rec-q">"Program director familiar with Arsalan's academic performance, research achievements, and professional development throughout the M.Arch program."</div></div>
+      <div class="rec"><div class="rec-av">DO</div><div class="rec-n">Daniel Ortega</div><div class="rec-r">Director</div><div class="rec-o">University of Nevada, Las Vegas · School of Architecture</div><div class="rec-links"><a href="/cdn-cgi/l/email-protection#b3d7d2dddad6df9ddcc1c7d6d4d2f3c6dddfc59dd6d7c6"><span class="__cf_email__" data-cfemail="f094919e99959cde9f8284959791b0859e9c86de959485">[email&#160;protected]</span></a></div><div class="rec-q">"Program director familiar with Arsalan's academic performance, research achievements, and professional development throughout the M.Arch program."</div></div>
     </div>
   </div>
   <div class="nextbar">
