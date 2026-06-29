@@ -75,6 +75,26 @@ body.hov #cur-r{width:46px;height:46px;border-color:var(--amber);}
 .pl-preview{position:relative;overflow:hidden;background:var(--surface);min-height:320px;}
 .pl-preview img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s,filter .4s;filter:grayscale(1) brightness(.82);}
 .pl-preview:hover img{transform:scale(1.03);filter:grayscale(0) brightness(1);}
+.pl-preview::after{content:'Visit site ↗';position:absolute;top:14px;right:14px;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);background:var(--amber);padding:6px 9px;opacity:0;transform:translateY(-4px);transition:opacity .25s,transform .25s;pointer-events:none;z-index:2;}
+.pl-preview:hover::after{opacity:1;transform:translateY(0);}
+/* ── Scroll reveal (CV-style) for other pages — uses translate, not transform, to avoid clashing with hover effects ── */
+.rv{opacity:0;translate:0 28px;transition:opacity .7s cubic-bezier(.22,.7,.2,1),translate .7s cubic-bezier(.22,.7,.2,1);}
+.rv.in{opacity:1;translate:0 0;}
+@media(prefers-reduced-motion:reduce){.rv,.rv.in{opacity:1!important;translate:none!important;transition:none!important;}}
+/* ── About cover: interactive stat numbers + animated award credentials ── */
+.st-box{transition:transform .3s cubic-bezier(.2,.7,.2,1),border-color .3s,background .3s;}
+.st-box:hover{transform:translateY(-5px);border-color:var(--amber);}
+.st-n{transition:color .3s;}
+.st-box:hover .st-n{color:var(--amber2);}
+.cred{opacity:0;transition:transform .32s ease;}
+.cred:hover{transform:translateX(7px);}
+.cred-txt strong{transition:color .3s;}
+.cred:hover .cred-txt strong{color:var(--amber2);}
+.creds.go .cred{animation:credInFx .6s cubic-bezier(.2,.7,.2,1) both;}
+.creds.go .cred:nth-child(2){animation-delay:.12s;}
+.creds.go .cred:nth-child(3){animation-delay:.24s;}
+@keyframes credInFx{from{opacity:0;translate:-16px 0;}to{opacity:1;translate:0 0;}}
+@media(prefers-reduced-motion:reduce){.cred{opacity:1!important;animation:none!important;}.st-box:hover,.cred:hover{transform:none!important;}}
 .pl-preview-lbl{position:absolute;bottom:0;left:0;right:0;padding:16px 20px;background:linear-gradient(transparent,rgba(13,13,13,.88));font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);}
 /* Professional works cards in portfolio */
 .prof-works{padding:44px 56px;border-top:1px solid var(--border);margin-top:8px;}
@@ -889,7 +909,7 @@ body.light #theme-tog .ic-moon{display:block;}
         <a class="pl-link" href="https://hotel.hardrock.com/news/hard-rock-international-breaks-ground-on-hard-rock-hotel-and-casino-athens/" target="_blank">Hard Rock — Groundbreaking Announcement</a>
       </div>
     </div>
-    <div class="pl-preview">
+    <div class="pl-preview" onclick="window.open('https://www.gensler.com/projects/hard-rock-integrated-resort-complex-ellinikou','_blank','noopener')" title="Visit project site ↗">
       <img src="https://hotel.hardrock.com/files/5829/HRHC-athens-groundbreaking.jpg" alt="Hard Rock Athens" loading="lazy"/>
       <div class="pl-preview-lbl">gensler.com · Project Overview</div>
     </div>
@@ -897,7 +917,7 @@ body.light #theme-tog .ic-moon{display:block;}
 
   <!-- Project 02 -->
   <div class="pl-item">
-    <div class="pl-preview">
+    <div class="pl-preview" onclick="window.open('https://klaijubawald.com/projects/hard-rock-hotel-casino-las-vegas','_blank','noopener')" title="Visit project site ↗">
       <img src="https://images.squarespace-cdn.com/content/v1/685474284b8c5a1130dd74be/a7e7f43b-a261-4dc9-9dfd-1e89b25299bd/Hard+Rock+Hotel+Las+Vegas-1+copy.jpg?format=1500w" alt="Hard Rock Guitar Tower Las Vegas" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
       <div class="pl-ph" style="display:none"><div class="pl-ph-name">Hard Rock Hotel &amp; Casino Las Vegas</div><div class="pl-ph-sub">Guitar Tower · Las Vegas Strip</div><div class="pl-ph-note">klaijubawald.com · Project Feature</div></div>
       <div class="pl-preview-lbl">klaijubawald.com · Project Feature</div>
@@ -952,7 +972,7 @@ body.light #theme-tog .ic-moon{display:block;}
         <a class="pl-link" href="https://www.hardrock.com/blog/hard-rock-international-san-juan-hotel-casino" target="_blank">Hard Rock — San Juan Hotel &amp; Casino</a>
       </div>
     </div>
-    <div class="pl-preview">
+    <div class="pl-preview" onclick="window.open('https://www.hardrock.com/blog/hard-rock-international-san-juan-hotel-casino','_blank','noopener')" title="Visit project site ↗">
       <img src="https://www.hardrock.com/content/dam/shrss/hotel/properties/san-juan/hot-sju-exterior-rendering-1280x854.jpg" alt="Hard Rock San Juan" loading="lazy"/>
       <div class="pl-preview-lbl">hardrock.com · Hotel Blog</div>
     </div>
@@ -960,7 +980,7 @@ body.light #theme-tog .ic-moon{display:block;}
 
   <!-- Project 04 -->
   <div class="pl-item">
-    <div class="pl-preview">
+    <div class="pl-preview" onclick="window.open('https://klaijubawald.com/projects/lvcc','_blank','noopener')" title="Visit project site ↗">
       <img src="assets/projects/lvcc-web.jpg" alt="Las Vegas Convention Center" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
       <div class="pl-ph" style="display:none"><div class="pl-ph-name">Las Vegas Convention Center</div><div class="pl-ph-sub">New Build · SD through CDs</div><div class="pl-ph-note">klaijubawald.com · Project Feature</div></div>
       <div class="pl-preview-lbl">klaijubawald.com · Project Feature</div>
@@ -989,6 +1009,36 @@ body.light #theme-tog .ic-moon{display:block;}
       </div>
     </div>
   </div>
+  <!-- Project 05 -->
+  <div class="pl-item">
+    <div class="pl-info">
+      <div>
+        <div class="pl-num">Project 05 · Construction Administration</div>
+        <div class="pl-name">Durango Casino &amp; Resort</div>
+        <div class="pl-firm">JIVE Architecture · Las Vegas, NV</div>
+        <div class="pl-desc">A $750 million ground-up resort on the southwest edge of the Las Vegas valley — a 15-story tower of 211 rooms rising above an 83,178-square-foot casino floor, wrapped in a full range of dining from fine to casual. I supported the project with JIVE Architecture through Construction Administration, carrying the drawings into the field and keeping the design intent intact through to opening.</div>
+        <div class="pl-contrib">
+          <div class="pl-contrib-lbl">My Contributions</div>
+          <div class="pl-contrib-tags">
+            <span>Construction Administration</span>
+            <span>RFI &amp; Submittal Review</span>
+            <span>Field Coordination</span>
+            <span>Architect's Supplemental Instructions</span>
+            <span>Punch Walk &amp; Closeout</span>
+          </div>
+        </div>
+      </div>
+      <div class="pl-links">
+        <a class="pl-link" href="https://jivelv.com/portfolio/durango-casino-resort/" target="_blank">JIVE Architecture — Project Feature</a>
+      </div>
+    </div>
+    <div class="pl-preview" onclick="window.open('https://jivelv.com/portfolio/durango-casino-resort/','_blank','noopener')" title="Visit project site ↗">
+      <img src="https://jivelv.com/wp-content/uploads/2024/04/Durango-Exterior-2-1.jpeg" alt="Durango Casino &amp; Resort" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+      <div class="pl-ph" style="display:none"><div class="pl-ph-name">Durango Casino &amp; Resort</div><div class="pl-ph-sub">15-Story Tower · Las Vegas, NV</div><div class="pl-ph-note">jivelv.com · Project Feature</div></div>
+      <div class="pl-preview-lbl">jivelv.com · Project Feature</div>
+    </div>
+  </div>
+
   <div class="nextbar">
     <a class="co-l" href="#" onclick="switchTab('teaching');return false;">Teaching →</a>
   </div>
@@ -1041,10 +1091,10 @@ body.light #theme-tog .ic-moon{display:block;}
   </div>
   <div style="padding:2px;">
     <div class="rec-g">
-      <div class="rec"><div class="rec-av">GN</div><div class="rec-n">Glenn Nowak</div><div class="rec-r">Thesis Advisor + Graduate Coordinator</div><div class="rec-o">University of Nevada, Las Vegas · School of Architecture</div><div class="rec-links"><a href="/cdn-cgi/l/email-protection#8aede6efe4e4a4e4e5fdebe1caffe4e6fca4efeeff"><span class="__cf_email__" data-cfemail="47202b22292969292830262c0732292b3169222332">[email&#160;protected]</span></a></div><div class="rec-q">"Collaborated on the WFCHRIE peer-reviewed paper on robot-supported QSR interiors. Co-supervised the Library + Concert Hall competition thesis project."</div></div>
+      <div class="rec"><div class="rec-av">GN</div><div class="rec-n">Glenn Nowak</div><div class="rec-r">Thesis Advisor + Graduate Coordinator</div><div class="rec-o">University of Nevada, Las Vegas · School of Architecture</div><div class="rec-links"><a href="/cdn-cgi/l/email-protection#88efe4ede6e6a6e6e7ffe9e3c8fde6e4fea6edecfd"><span class="__cf_email__" data-cfemail="63040f060d0d4d0d0c14020823160d0f154d060716">[email&#160;protected]</span></a></div><div class="rec-q">"Collaborated on the WFCHRIE peer-reviewed paper on robot-supported QSR interiors. Co-supervised the Library + Concert Hall competition thesis project."</div></div>
       <div class="rec"><div class="rec-av">WH</div><div class="rec-n">William Hallisky</div><div class="rec-r">Design Director</div><div class="rec-o">Steelman Partners · Las Vegas, NV</div><div class="rec-links"><a href="tel:2134483446">213-448-3446</a></div><div class="rec-q">"Supervised internship work on entertainment architecture projects across Steelman's global casino-resort portfolio during Summer 2023."</div></div>
       <div class="rec"><div class="rec-av">PR</div><div class="rec-n">Phil Rocha</div><div class="rec-r">Project Manager</div><div class="rec-o">Steelman Partners · Las Vegas, NV</div><div class="rec-links"><a href="tel:3057483635">305-748-3635</a></div><div class="rec-q">"Oversaw project documentation and coordination tasks during internship at Steelman Partners in Summer 2023."</div></div>
-      <div class="rec"><div class="rec-av">DO</div><div class="rec-n">Daniel Ortega</div><div class="rec-r">Director</div><div class="rec-o">University of Nevada, Las Vegas · School of Architecture</div><div class="rec-links"><a href="/cdn-cgi/l/email-protection#284c4946414d4406475a5c4d4f49685d46445e064d4c5d"><span class="__cf_email__" data-cfemail="1a7e7b74737f763475686e7f7d7b5a6f74766c347f7e6f">[email&#160;protected]</span></a></div><div class="rec-q">"Program director familiar with Arsalan's academic performance, research achievements, and professional development throughout the M.Arch program."</div></div>
+      <div class="rec"><div class="rec-av">DO</div><div class="rec-n">Daniel Ortega</div><div class="rec-r">Director</div><div class="rec-o">University of Nevada, Las Vegas · School of Architecture</div><div class="rec-links"><a href="/cdn-cgi/l/email-protection#e084818e89858cce8f9294858781a0958e8c96ce858495"><span class="__cf_email__" data-cfemail="b8dcd9d6d1ddd496d7caccdddfd9f8cdd6d4ce96dddccd">[email&#160;protected]</span></a></div><div class="rec-q">"Program director familiar with Arsalan's academic performance, research achievements, and professional development throughout the M.Arch program."</div></div>
     </div>
   </div>
   <div class="nextbar">
@@ -1256,6 +1306,7 @@ function switchTab(id){
   if(id==='home'){const v=document.getElementById('bg-vid');if(v)v.play().catch(()=>{});}
   if(id==='cv')runCVAnims();
   if((id==='portfolio'||id==='projects')&&!spreadsBuilt)buildSpreads();
+  if(window.__revealInView)setTimeout(function(){window.__revealInView('panel-'+id);},60);
 }
 window.switchTab=switchTab;
 function toggleTheme(){var light=document.body.classList.toggle('light');try{localStorage.setItem('am-theme',light?'light':'dark');}catch(e){}}
@@ -1300,29 +1351,38 @@ async function renderTlb(){
   try{
     const pdf=await pdfjsLib.getDocument(t.pdf).promise;
     if(token!==tToken)return;
-    const dpr=Math.min(window.devicePixelRatio||1,2);
+    const dpr=Math.min(window.devicePixelRatio||1,1.5);
     const targetW=Math.min(scroll.clientWidth-36,1100);
+    const maxSide=2600;
+    let shown=0;
     for(let p=1;p<=pdf.numPages;p++){
       if(token!==tToken)return;
       loadtxt.textContent='Rendering page '+p+' of '+pdf.numPages+'…';
-      const page=await pdf.getPage(p);
-      const base=page.getViewport({scale:1});
-      const scale=(targetW/base.width)*dpr;
-      const vp=page.getViewport({scale});
-      const canvas=document.createElement('canvas');
-      canvas.width=vp.width;canvas.height=vp.height;
-      canvas.style.width=(vp.width/dpr)+'px';
-      const ctx=canvas.getContext('2d');
-      await page.render({canvasContext:ctx,viewport:vp}).promise;
-      if(token!==tToken)return;
-      scroll.appendChild(canvas);
-      if(p===1)loader.style.display='none';
+      try{
+        const page=await pdf.getPage(p);
+        const base=page.getViewport({scale:1});
+        let scale=(targetW/base.width)*dpr;
+        const longest=Math.max(base.width,base.height)*scale;
+        if(longest>maxSide)scale*=maxSide/longest;
+        const vp=page.getViewport({scale});
+        const canvas=document.createElement('canvas');
+        canvas.width=Math.round(vp.width);canvas.height=Math.round(vp.height);
+        canvas.style.width=(vp.width/dpr)+'px';
+        const ctx=canvas.getContext('2d');
+        await page.render({canvasContext:ctx,viewport:vp}).promise;
+        if(token!==tToken)return;
+        scroll.appendChild(canvas);
+        shown++;
+        if(shown===1)loader.style.display='none';
+      }catch(pErr){/* skip a page that won't render, keep the rest */}
     }
-    loader.style.display='none';
+    if(token!==tToken)return;
+    if(shown===0){loadtxt.innerHTML='This set is large. Use <b>Open PDF ↗</b> above to view it.';loader.style.display='flex';}
+    else loader.style.display='none';
   }catch(err){
     if(token!==tToken)return;
-    loadtxt.textContent='Couldn’t render preview — opening PDF in a new tab.';
-    setTimeout(()=>{if(token===tToken){window.open(t.pdf,'_blank');loader.style.display='none';}},900);
+    loadtxt.innerHTML='Couldn’t render preview here. Use <b>Open PDF ↗</b> above to view it.';
+    loader.style.display='flex';
   }
 }
 window.filterCohort=filterCohort;window.openTlb=openTlb;window.closeTlb=closeTlb;window.stepTlb=stepTlb;
@@ -1336,6 +1396,73 @@ document.getElementById('tlb').addEventListener('click',e=>{if(e.target.id==='tl
 function goHome(){switchTab('home');document.getElementById('panel-home').scrollTop=0;}
 function goToAbout(){document.getElementById('ab-sec').scrollIntoView({behavior:'smooth'});}
 window.goHome=goHome;window.goToAbout=goToAbout;
+
+/* ── SCROLL REVEAL: bring the CV's section-by-section motion to the other pages ── */
+(function(){
+  if(!('IntersectionObserver' in window))return;
+  const groups={
+    'panel-projects':'.pl-head,.pl-item',
+    'panel-portfolio':'.proj-section,.prof-works-head,.pw-card',
+    'panel-teaching':'.tch-head,.coh-bar,.coh-note,.tch-card',
+    'panel-certs':'.cert-head,.cert',
+    'panel-rec':'.rec-head,.rec',
+    'panel-experimental':'.exp-head,.exp-item',
+    'panel-connect':'.con-head,.con-item'
+  };
+  const io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:0.08,rootMargin:'0px 0px -6% 0px'});
+  Object.keys(groups).forEach(function(pid){
+    const sel=groups[pid].split(',').map(function(s){return '#'+pid+' '+s.trim();}).join(',');
+    const byParent=new Map();
+    document.querySelectorAll(sel).forEach(function(el){
+      el.classList.add('rv');
+      const p=el.parentElement;
+      const n=byParent.get(p)||0;
+      el.style.transitionDelay=Math.min(n*70,420)+'ms';
+      byParent.set(p,n+1);
+      io.observe(el);
+    });
+  });
+  window.__revealInView=function(pid){
+    document.querySelectorAll('#'+pid+' .rv').forEach(function(el){
+      const r=el.getBoundingClientRect();
+      if(r.top<window.innerHeight*0.97&&r.bottom>0){el.classList.add('in');io.unobserve(el);}
+    });
+  };
+})();
+
+/* ── ABOUT COVER FX: count-up stats + reveal credentials ── */
+function countUpStats(){
+  document.querySelectorAll('#ab-sec .st-n').forEach(function(el){
+    if(el.dataset.cu)return; el.dataset.cu='1';
+    var raw=(el.textContent||'').trim();
+    var m=raw.match(/^(\d+)/); if(!m)return;
+    var target=parseInt(m[1],10);
+    var plus=raw.indexOf('+')>-1;
+    var span=el.querySelector('span');
+    var t0=performance.now(), dur=1100;
+    function frame(now){
+      var p=Math.min((now-t0)/dur,1);
+      var v=Math.round((1-Math.pow(1-p,3))*target);
+      if(span){el.firstChild.textContent=v;}else{el.textContent=v+(plus?'+':'');}
+      if(p<1)requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  });
+}
+var aboutFxDone=false;
+function aboutFx(){
+  if(aboutFxDone)return;
+  var ab=document.getElementById('ab-sec'); if(!ab)return;
+  if(ab.getBoundingClientRect().top<window.innerHeight*0.78){
+    aboutFxDone=true;
+    countUpStats();
+    var creds=document.querySelector('#ab-sec .creds'); if(creds)creds.classList.add('go');
+  }
+}
+document.getElementById('panel-home').addEventListener('scroll',aboutFx,{passive:true});
+window.addEventListener('scroll',aboutFx,{passive:true});
 
 /* ── AUTO-SWITCH TO CV ── */
 let autoSwitchDone=false;
